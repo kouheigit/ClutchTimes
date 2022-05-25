@@ -25,14 +25,15 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 //admin
+//エラーが発生している場所↓
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/',         function () { return redirect('/admin/home'); });
-    Route::get('login',     'Admin\LoginController@showLoginForm')->name('admin.login');
-    Route::post('login',    'Admin\LoginController@login');
+    Route::get('login',     [App\Http\Controllers\Admin\LoginController::class, 'showLoginForm'])->name('admin.login');
+    Route::post('login',     [App\Http\Controllers\Admin\LoginController::class,'login']);
 });
 
 //admin
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
-    Route::post('logout',   'Admin\LoginController@logout')->name('admin.logout');
-    Route::get('home',      'Admin\HomeController@index')->name('admin.home');
+    Route::post('logout',   [App\Http\Controllers\Admin\LoginController::class,'logout'])->name('admin.logout');
+    Route::get('home',      [App\Http\Controllers\Admin\HomeController::class,'index'])->name('admin.home');
 });
