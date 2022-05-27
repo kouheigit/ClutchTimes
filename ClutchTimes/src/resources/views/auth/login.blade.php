@@ -70,7 +70,7 @@
                                     {{ __('　　　　　　　　　　　　　　　　　　　パスワードを忘れましたか?') }}
                                 </a>
                                 <!--【重要】新規登録の前に個人情報の同意ページにアクセス-->
-                                <a class="nav-link" href="{{ route('tos') }}">
+                                <a class="nav-link" href="{{ route('register') }}">
                                     {{ __('　　　　　　　　　　　　　　　　　　　　新規登録はこちらから') }}
                                 </a>
                             @endif

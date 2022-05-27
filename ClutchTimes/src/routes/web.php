@@ -21,8 +21,6 @@ Route::get('/', function () {
     return view('welcome');
 });*/
 
-Route::get('/tos', [App\Http\Controllers\tosController::class, 'index'])->name('tos');
-Route::post('/tos', [App\Http\Controllers\tosController::class, 'tospost'])->name('tos');
 //Auth::routes();
 Auth::routes(['verify' => true]);
 //Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
