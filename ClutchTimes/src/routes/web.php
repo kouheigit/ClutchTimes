@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 //ルートをログイン画面に設定する
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('login');
 
 /*
 Route::get('/', function () {

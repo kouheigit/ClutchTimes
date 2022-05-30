@@ -44,6 +44,7 @@
                 <ul class="navbar-nav ms-auto">
                     <!-- Authentication Links -->
                     <a class="nav-link" href="{{ route('admin.home') }}">管理側ページへ</a>
+                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}ログアウトテスト</a>
                     @guest
                         @if (Route::has('login'))
                             <li class="nav-item">
