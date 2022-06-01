@@ -2,14 +2,11 @@
 namespace App\Exceptions;
 
 use Exception;
-use Illuminate\Auth\AuthenticationException; //この追加を忘れないで
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
-    .
-    . /* 省略 */
-    .
     /**
      * 認証していない場合にガードを見てそれぞれのログインページへ飛ばず
      *
