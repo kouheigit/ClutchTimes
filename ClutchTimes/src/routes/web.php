@@ -31,7 +31,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //admin
 Route::group(['prefix' => 'admin'], function() {
-    Route::get('/',         function () { return redirect('/admin/home'); });
+    Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
     Route::get('login',     [App\Http\Controllers\Admin\LoginController::class, 'showLoginForm'])->name('admin.login');
     Route::post('login',     [App\Http\Controllers\Admin\LoginController::class,'login']);
 });
