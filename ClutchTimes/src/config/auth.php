@@ -15,11 +15,11 @@ return [
 
     'defaults' => [
         //'guard' => 'web',
-
-        'guard' => 'admin',
-        'passwords' => 'admins',
-        /*'guard' => 'user',
-        'passwords' => 'users',*/
+/*                                  //ads_serverではguard,passwordはusersだった。
+        'guard' => 'admin',        //←ここをadminにするとログイン認証テーブルがusersテーブルになる
+        'passwords' => 'admins',*/
+        'guard' => 'users',//←ここをusersにするとuserログイン認証テーブルがusersテーブルになる
+        'passwords' => 'users',
     ],
 
 
@@ -41,7 +41,7 @@ return [
     */
 
     'guards' => [
-        //'web'
+        //web=>ここをwebに変更するとAuth guard [users] is not defined.が発生する'
         'users'=> [
             'driver' => 'session',
             'provider' => 'users',
