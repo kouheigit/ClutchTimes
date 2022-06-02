@@ -39,6 +39,7 @@
                             </div>
                         </div>
 
+                        <!--ログイン状態の保持は除外
                         <div class="row mb-3">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
@@ -49,18 +50,25 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>
-
+                        </div>-->
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
+                                <a class="btn btn-link" href="{{ route('register') }}">
+                                    {{ __('新規登録はこちら') }}
+                                </a>
+                                <br>
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
+                                <br>
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                <!--    <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
-                                    </a>
+                                    </a>-->
                                 @endif
                             </div>
                         </div>

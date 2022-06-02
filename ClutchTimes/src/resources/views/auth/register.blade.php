@@ -1,6 +1,6 @@
 @extends('layouts.app')
-
 @section('content')
+    <link href="{{ asset('css/tos.css') }}" rel="stylesheet">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-<!---
+<!---                  名前を除外
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 
@@ -60,6 +60,31 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+                        <!--追加部分-->
+                        <section>
+                            <div class="maincontent">
+                                <div class="subcontent">
+                                    　　　　　　　　　　　　　　　　　<h4>個人情報の規約</h4>
+                                </div>
+                                <div class="subcontent">
+                                    <b>利用規約</b>
+                                    <div class="textcontent">
+                                        <p>
+                                            テキストテキストテキストテキストテキストテキススト
+                                            <br>
+                                            テキストテキストテキストテキストテキストテキススト
+                                            <br>
+                                            テキストテキストテキストテキストテキストテキススト
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="checkcontent">
+                                    <input type="checkbox" name="checked" required style="transform:scale(2.0)" ;>
+                                    <label>　利用規約、個人情報の扱いに同意する</label>
+                                </div>
+                            </div>
+                        </section>
+                        <!--追加部分終了-->
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
