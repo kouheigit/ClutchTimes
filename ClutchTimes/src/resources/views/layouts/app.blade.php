@@ -57,12 +57,14 @@
                                 </li>
                             @endif
                         @else
-                            <!--ここがログアウトする項目ログアウtp機能を作る際は以下を参考にする【重要】-->
+                            <!--ここがログアウトする項目ログアウト機能を作る際は以下を参考にする【重要】-->
                             <li class="nav-item dropdown">
 
                                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                     <!--ユーザーネーム表示機能は消す-->
+                                    <!--{{ Auth::user()->name }}-->
                                 </a>
+                                <!--ログアウト機能は本番の際には必ず消す-->
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                      <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
