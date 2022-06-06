@@ -32,6 +32,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //admin
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
+    //news記事を追加
+    Route::get('addnews', [App\Http\Controllers\Admin\HomeController::class, 'addnews'])->name('admin.addnews');
+    Route::post('addnews', [App\Http\Controllers\Admin\HomeController::class, 'addnewspost'])->name('admin.addnews');
+    //ログイン機能
     Route::get('login',     [App\Http\Controllers\Admin\LoginController::class, 'showLoginForm'])->name('admin.login');
     Route::post('login',     [App\Http\Controllers\Admin\LoginController::class,'login']);
 });

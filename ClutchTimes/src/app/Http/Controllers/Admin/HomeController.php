@@ -26,4 +26,14 @@ class HomeController extends Controller
     {
         return view('admin.home');  //変更
     }
+    //追加　ニュース追加欄
+    public function addnews(Request $request)
+    {
+        return view('admin.addnews');
+    }
+    public function  addnewspost(Request $request)
+    {
+        $msg = $request->input('msg');
+        return view('admin.addnews',compact('msg'));
+    }
 }
