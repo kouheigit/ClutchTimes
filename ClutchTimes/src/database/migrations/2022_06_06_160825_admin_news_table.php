@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('admin_news_table', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title',100);
+            $table->string('date',25);
             $table->text('text');
             $table->timestamps();
         });
