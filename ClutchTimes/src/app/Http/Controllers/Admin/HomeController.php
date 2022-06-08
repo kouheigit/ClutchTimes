@@ -35,15 +35,7 @@ class HomeController extends Controller
     }
     public function  addnewspost(addnewsRequest $request)
     {
-        //validate機能一時除外
-        /*
-        $validate_rule =[
-            'title' =>'between:0,100',
-            'comment'=>'between:0,1000',
-        ];
 
-        $this->validate($request,$validate_rule);
-*/
         //値を取得
         $title = $request->input('title');
         //日付、時刻を取得
@@ -52,12 +44,9 @@ class HomeController extends Controller
         //本文を取得
         $comment = $request->input('comment');
 
-
         $date2 = $date1 .$time;
         //取得した値をY-m-d型に変換【重要】
         $date = date('Y-m-d H:i:s' ,strtotime($date2));
-
-
 
 
         //テストコード$date(予定の日時)が$today(現在の日時)に至ってない。
@@ -69,14 +58,14 @@ class HomeController extends Controller
             $date ="まだ投稿予定の時刻じゃありません";
         }*/
 
-        /*(insertメソット全てが完成したらコメントアウトを外す)
         $value = [
             'title'=>$title,
             'date'=>$date,
             'text'=>$comment,
         ];
         DB::table('admin_news_table')->insert($value);
-*/
-        return view('admin.addnews',compact('title','date','comment'));
+
+        $complete ="投稿が完了しました";
+        return view('admin.addnews',compact('title','date','comment','complete'));
     }
 }
