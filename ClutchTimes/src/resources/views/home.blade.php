@@ -2,6 +2,13 @@
 
 @section('content')
     <h1>いやっほう</h1>
+    {{$msg}}
+@foreach((array)$test3 as $syamu)
+   {{ $syamu }}
+@endforeach
+
+    {{$tests}}
+    <!--homeの大半は除外-->
     <!--
 <div class="container">
     <div class="row justify-content-center">
