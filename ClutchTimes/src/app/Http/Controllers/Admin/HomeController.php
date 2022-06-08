@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Admin;  // Adminを追加
-use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\addnewsRequest;
+//use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -32,16 +33,17 @@ class HomeController extends Controller
     {
         return view('admin.addnews');
     }
-    public function  addnewspost(Request $request)
+    public function  addnewspost(addnewsRequest $request)
     {
-
+        //validate機能一時除外
+        /*
         $validate_rule =[
             'title' =>'between:0,100',
             'comment'=>'between:0,1000',
         ];
 
         $this->validate($request,$validate_rule);
-
+*/
         //値を取得
         $title = $request->input('title');
         //日付、時刻を取得
@@ -52,7 +54,7 @@ class HomeController extends Controller
 
 
         $date2 = $date1 .$time;
-        //取得した値をY-m-d型に変換
+        //取得した値をY-m-d型に変換【重要】
         $date = date('Y-m-d H:i:s' ,strtotime($date2));
 
 
