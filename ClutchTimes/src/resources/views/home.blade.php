@@ -3,11 +3,10 @@
 @section('content')
     <h1>いやっほう</h1>
     {{$msg}}
-@foreach((array)$test3 as $syamu)
-   {{ $syamu }}
-@endforeach
-
-    {{$tests}}
+    {{$title}}
+    <h1>{{$showvalue}}</h1>
+    <h1>{{$showvalue1}}</h1>
+    <h1>{{$showvalue2}}</h1>
     <!--homeの大半は除外-->
     <!--
 <div class="container">
