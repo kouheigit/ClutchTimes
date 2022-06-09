@@ -24,10 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         $showvalue = null;
         $showvalue1 = null;
         $showvalue2 = null;
-
+        //今日の日時を取得する
         $today = date("Y-m-d H:i:s");//今日の日時を取得する
 /*
  * 変数変更　test4は showvalueに変更
@@ -39,7 +40,7 @@ class HomeController extends Controller
         //全てのデータを取得
          $alldate = DB::table('admin_news_table')->orderBy('date', 'asc')->pluck("date");
 
-        $test3 = Array();
+        $datetimeArray = Array();
         foreach($alldate as $alldate1){
             //日時以降のものを取得する
             //現在の日時以降のものは取得できた
@@ -49,26 +50,29 @@ class HomeController extends Controller
                 //日時を取得
                 $date = DB::table('admin_news_table')->where('date','=',$alldate1)->value("date");
                 echo $title;
-
+                //タイトル、日時を結合
                 $datetime =$title.$date;
-                $test3[] = $datetime;
+                //配列化
+                $datetimeArray[] = $datetime;
                 //$test3[] = $test2;
                 //echo gettype( $test2 );
                 echo "<br>";
             }
         }
-        $testnon = array_reverse($test3);
-        var_dump($test3);
+        //値を最新順に入れ替える
+        $datetimeArray_reverse = array_reverse($datetimeArray);
+        var_dump($datetimeArray);
+
         //配列の中身が存在するかどうか
-        if (array_key_exists(0, $testnon)) {
-            $showvalue = $testnon[0];
+        if (array_key_exists(0, $datetimeArray_reverse)) {
+            $showvalue = $datetimeArray_reverse[0];
             // キー名が存在する場合
         }
-        if (array_key_exists(1, $testnon)) {
-            $showvalue1 = $testnon[1];
+        if (array_key_exists(1, $datetimeArray_reverse)) {
+            $showvalue1 = $datetimeArray_reverse[1];
         }
-        if (array_key_exists(2, $testnon)) {
-            $showvalue2 = $testnon[2];
+        if (array_key_exists(2, $datetimeArray_reverse)) {
+            $showvalue2 = $datetimeArray_reverse[2];
         }
 /*
          $showvalue = $testnon[0];
