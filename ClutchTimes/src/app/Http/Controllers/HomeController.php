@@ -37,9 +37,8 @@ class HomeController extends Controller
 
         //データ情報一覧を取得する
         //$test = DB::table('admin_news_table')->pluck("date");
-        //全てのデータを取得
+        //全ての日付及びデータを取得
          $alldate = DB::table('admin_news_table')->orderBy('date', 'asc')->pluck("date");
-
         $datetimeArray = Array();
         foreach($alldate as $alldate1){
             //日時以降のものを取得する
@@ -49,21 +48,19 @@ class HomeController extends Controller
                 $title = DB::table('admin_news_table')->where('date','=',$alldate1)->value("title");
                 //日時を取得
                 $date = DB::table('admin_news_table')->where('date','=',$alldate1)->value("date");
-                echo $title;
                 //タイトル、日時を結合
                 $datetime =$title.$date;
                 //配列化
                 $datetimeArray[] = $datetime;
                 //$test3[] = $test2;
                 //echo gettype( $test2 );
-                echo "<br>";
             }
         }
         //値を最新順に入れ替える
         $datetimeArray_reverse = array_reverse($datetimeArray);
-        var_dump($datetimeArray);
+        //var_dump($datetimeArray);
 
-        //配列の中身が存在するかどうか
+        //配列の中身が存在するかどうか確認
         if (array_key_exists(0, $datetimeArray_reverse)) {
             $showvalue = $datetimeArray_reverse[0];
             // キー名が存在する場合
@@ -84,7 +81,6 @@ class HomeController extends Controller
         if($date > $today){
             $date ="まだ投稿予定の時刻じゃありません";
         }*/
-        $msg ="あららトゥーらー";
-        return view('home',compact('msg','title','showvalue','showvalue1','showvalue2'));
+        return view('home',compact('showvalue','showvalue1','showvalue2'));
     }
 }

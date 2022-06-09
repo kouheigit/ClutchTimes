@@ -2,8 +2,8 @@
 
 @section('content')
     <h1>いやっほう</h1>
-    {{$msg}}
-    {{$title}}
+
+    <form method="post" name="form1">
     <h1>{{$showvalue}}</h1>
     <h1>{{$showvalue1}}</h1>
     <h1>{{$showvalue2}}</h1>
