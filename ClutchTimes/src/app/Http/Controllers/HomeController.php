@@ -85,6 +85,15 @@ class HomeController extends Controller
     }
     //postに後で変更
     public function article(Request $request){
-        return view('auth.article');
+        $articlevalue = $request->input('articlevalue');
+        //日時のみを切り出す
+        $datetime_strpos = substr($articlevalue, -19);
+        //日時を整形する
+        $datetime = date('Y-m-d H:i:s' ,strtotime($datetime_strpos));
+        //タイトルを取得
+        $title = DB::table('admin_news_table')->where('date', 'Like', $datetime)->value("title");
+        //$Ymd = date('Y-m-d H:i:s' ,strtotime($articlevalue));
+
+        return view('auth.article',compact('articlevalue','datetime','title'));
     }
 }

@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('content')
+    {{ $articlevalue }}
+    <h1>{{$datetime}}</h1>
+    <h3>{{$title}}</h3>
     <!--テストコード--
     <form method="POST" id="form1"　action="{{ route('home') }}">
         @csrf

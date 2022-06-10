@@ -4,19 +4,19 @@
     <h1>記事表示場面です</h1>
     <form method="POST" id="form1"　action="{{ route('auth.article') }}">
         @csrf
-        <input type="hidden" name="{{$showvalue}}" value="名前">
+        <input type="hidden" name="articlevalue" value="{{$showvalue}}">
         <a href="javascript:void(0)"onclick="this.parentNode.submit()">{{$showvalue}}</a>
     </form>
 
     <form method="POST" id="form1"　action="{{ route('auth.article') }}">
         @csrf
-        <input type="hidden" name="{{$showvalue1}}" value="名前">
+        <input type="hidden" name="articlevalue" value="{{$showvalue1}}">
         <a href="javascript:void(0)"onclick="this.parentNode.submit()">{{$showvalue1}}</a>
     </form>
 
     <form method="POST" id="form1"　action="{{ route('auth.article') }}">
         @csrf
-        <input type="hidden" name="{{$showvalue2}}" value="名前">
+        <input type="hidden" name="articlevalue" value="{{$showvalue2}}">
         <a href="javascript:void(0)"onclick="this.parentNode.submit()">{{$showvalue2}}</a>
     </form>
 
