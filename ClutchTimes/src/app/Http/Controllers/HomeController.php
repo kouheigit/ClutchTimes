@@ -85,15 +85,21 @@ class HomeController extends Controller
     }
     //postに後で変更
     public function article(Request $request){
+        //値を取得する
         $articlevalue = $request->input('articlevalue');
+
         //日時のみを切り出す
         $datetime_strpos = substr($articlevalue, -19);
+        //タイトルのみ切り出す
+        $title_strpos = str_replace($datetime_strpos,'',$articlevalue);
         //日時を整形する
         $datetime = date('Y-m-d H:i:s' ,strtotime($datetime_strpos));
-        //タイトルを取得
-        $title = DB::table('admin_news_table')->where('date', 'Like', $datetime)->value("title");
+
+        //投稿時刻とタイトルの二重で検索する
+        $title = DB::table('admin_news_table')->where('date', 'Like', $datetime)->where('title', 'Like', $title_strpos)->value("title");
+        $text = DB::table('admin_news_table')->where('date', 'Like', $datetime)->where('title', 'Like', $title_strpos)->value("text");
         //$Ymd = date('Y-m-d H:i:s' ,strtotime($articlevalue));
 
-        return view('auth.article',compact('articlevalue','datetime','title'));
+        return view('auth.article',compact('title','text'));
     }
 }
