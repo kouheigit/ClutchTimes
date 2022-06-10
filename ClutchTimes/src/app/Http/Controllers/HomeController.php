@@ -83,4 +83,8 @@ class HomeController extends Controller
         }*/
         return view('home',compact('showvalue','showvalue1','showvalue2'));
     }
+    //postに後で変更
+    public function article(Request $request){
+        return view('auth.article');
+    }
 }
