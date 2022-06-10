@@ -66,6 +66,6 @@ class HomeController extends Controller
         DB::table('admin_news_table')->insert($value);
 
         $complete ="投稿が完了しました";
-        return view('admin.addnews',compact('title','date','comment','complete'));
+        return view('admin.addnews',compact('complete'));
     }
 }

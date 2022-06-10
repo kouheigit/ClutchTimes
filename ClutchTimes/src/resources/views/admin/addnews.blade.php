@@ -5,24 +5,7 @@
 <seciton>
     <div class="maincontent">
 @section('content')
-        <!--テスト表示させる-->
-        @isset($title)
-            <p>{{$title}}</p>
-        @else
-        @endisset
-        @isset($comment)
-            <p>{{$comment}}</p>
-        @else
-        @endisset
-        @isset($date)
-            <p>{{$date}}</p>
-        @else
-        @endisset
-        @isset($today)
-            <p>{{$today}}</p>
-        @else
-        @endisset
-        <!--テスト表示終了-->
+
         @isset($complete)
             <p>{{$complete}}</p>
         @else
