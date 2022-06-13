@@ -83,7 +83,7 @@ class HomeController extends Controller
         //$id = $request->input('id');
 
         $id = $request->input('articlevalue');
-        $news = DB::table('admin_news_table')->where('id', 'Like', $id)->get();
+        $news = DB::table('admin_news_table')->where('id', $id)->get();
         return view('auth.article',compact('news'));
         //値を取得する
         /*元コード【除外】
