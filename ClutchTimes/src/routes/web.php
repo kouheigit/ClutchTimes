@@ -40,6 +40,8 @@ Route::group(['prefix' => 'admin'], function() {
     //ログイン機能
     Route::get('login',     [App\Http\Controllers\Admin\LoginController::class, 'showLoginForm'])->name('admin.login');
     Route::post('login',     [App\Http\Controllers\Admin\LoginController::class,'login']);
+    Route::get('deletearticle', [App\Http\Controllers\Admin\HomeController::class, 'deletearticle'])->name('admin.deletearticle');
+    Route::post('deletemessage', [App\Http\Controllers\Admin\HomeController::class, 'deletemessage'])->name('admin.deletemessage');
 });
 
 //admin

@@ -8,7 +8,9 @@
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
                 <div class="card-body">
-                    <a href="{{ route('admin.addnews') }}">記事の追加テスト</a>
+                    <a href="{{ route('admin.addnews') }}">記事の追加</a>
+                    <br>
+                    <a href="{{ route('admin.deletearticle') }}">記事の削除</a>
 
 
                 @if (session('status'))
@@ -17,7 +19,6 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
                 </div>
             </div>
         </div>

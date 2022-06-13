@@ -24,21 +24,25 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $today = date("Y-m-d H:i:s");
+        $news = DB::table('admin_news_table')->where('date', '<=', $today)->orderBy('date', 'desc')->limit(3)->get();
+        return view('home',compact('news'));
 
+        /*エラーが出るところを見つけ次第 Slackで送られてきたものに修正する個々に記述せよ
+        以下は一時的に除外する($todayは持ってくる)*/
+        /*
         $showvalue = null;
         $showvalue1 = null;
         $showvalue2 = null;
         //今日の日時を取得する
         $today = date("Y-m-d H:i:s");//今日の日時を取得する
-/*
- * 変数変更　test4は showvalueに変更
- */
+
 
 
         //データ情報一覧を取得する
         //$test = DB::table('admin_news_table')->pluck("date");
         //全ての日付及びデータを取得
-         $alldate = DB::table('admin_news_table')->orderBy('date', 'asc')->pluck("date");
+        $alldate = DB::table('admin_news_table')->orderBy('date', 'asc')->pluck("date");
         $datetimeArray = Array();
         foreach($alldate as $alldate1){
             //日時以降のものを取得する
@@ -71,21 +75,18 @@ class HomeController extends Controller
         if (array_key_exists(2, $datetimeArray_reverse)) {
             $showvalue2 = $datetimeArray_reverse[2];
         }
-/*
-         $showvalue = $testnon[0];
-         $showvalue1 = $testnon[1];
-         $showvalue2 = $testnon[2];*/
-
-        //$test3 = ["Syamu","jtshibatar","HIKAKIN"];
-        /*
-        if($date > $today){
-            $date ="まだ投稿予定の時刻じゃありません";
-        }*/
-        return view('home',compact('showvalue','showvalue1','showvalue2'));
+        return view('home',compact('showvalue','showvalue1','showvalue2'));*/
     }
     //postに後で変更
     public function article(Request $request){
+       // $articlevalue = $request->input('id');
+        //$id = $request->input('id');
+
+        $id = $request->input('articlevalue');
+        $news = DB::table('admin_news_table')->where('id', 'Like', $id)->get();
+        return view('auth.article',compact('news'));
         //値を取得する
+        /*元コード【除外】
         $articlevalue = $request->input('articlevalue');
 
         //日時のみを切り出す
@@ -100,6 +101,7 @@ class HomeController extends Controller
         $text = DB::table('admin_news_table')->where('date', 'Like', $datetime)->where('title', 'Like', $title_strpos)->value("text");
         //$Ymd = date('Y-m-d H:i:s' ,strtotime($articlevalue));
 
-        return view('auth.article',compact('title','text'));
+        return view('auth.article',compact('title','text'));*/
+
     }
 }

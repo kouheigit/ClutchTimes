@@ -68,4 +68,21 @@ class HomeController extends Controller
         $complete ="投稿が完了しました";
         return view('admin.addnews',compact('complete'));
     }
+    public function deletearticle(Request $request)
+    {
+
+        $today = date("Y-m-d H:i:s");
+        // $news = DB::table('admin_news_table')->where('date', '<=', $today)->orderBy('date', 'desc')->limit(3)->get();
+        $hidden_news = DB::table('admin_news_table')->where('date', '>', $today)->orderBy('date', 'desc')->get();
+        $news = DB::table('admin_news_table')->where('date', '<=', $today)->orderBy('date', 'desc')->get();
+        return view('admin.deletearticle', compact('news', 'hidden_news'));
+    }
+
+    public function deletemessage(Request $request){
+        $deleteid = $request->input('deleteid');
+        $deletename = DB::table('admin_news_table')->where('id',$deleteid)->value('title');
+        DB::table('admin_news_table')->where('id',$deleteid)->delete();
+        return view('admin.deletemessage',compact('deletename'));
+    }
+
 }

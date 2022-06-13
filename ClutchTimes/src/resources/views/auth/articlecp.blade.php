@@ -1,14 +1,10 @@
 @extends('layouts.app')
 @section('content')
 
-    @foreach ($news as $val)
-        <p>投稿時刻</p>
-        <b>{{$val->date}}</b>
-        <p>タイトル</p>
-        　　　<b>{{$val->title}}</b>
-        <p>記事本文</p>
-            <b>{{$val->text}}</b>
-   @endforeach
+    <p>タイトル</p>
+    <h2>{{$title}}</h2>
+    <p>記事本文</p>
+    <h2>{{$text}}</h2>
             <!--テストコード--
     <form method="POST" id="form1"　action="{{ route('home') }}">
         @csrf
