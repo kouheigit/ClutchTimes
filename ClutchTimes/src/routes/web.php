@@ -44,6 +44,8 @@ Route::group(['prefix' => 'admin'], function() {
     Route::post('deletemessage', [App\Http\Controllers\Admin\HomeController::class, 'deletemessage'])->name('admin.deletemessage');
     Route::get('bet', [App\Http\Controllers\Admin\HomeController::class, 'bet'])->name('admin.bet');
     Route::get('betregister', [App\Http\Controllers\Admin\HomeController::class, 'betregister'])->name('admin.betregister');
+    //postに変更する↓
+    Route::post('betregisterpost', [App\Http\Controllers\Admin\HomeController::class, 'betregisterpost'])->name('admin.betregisterpost');
 });
 
 //admin

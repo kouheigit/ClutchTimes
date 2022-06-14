@@ -92,4 +92,38 @@ class HomeController extends Controller
     public function betregister(Request $request){
         return view('admin.betregister');
     }
+    //
+    public function betregisterpost(Request $request){
+
+        $title = $request->input('title');
+        $question = $request->input('question');
+        $answer1 = $request->input('answer1');
+        $answer2 = $request->input('answer2');
+        $answer3 = $request->input('answer3');
+        /*開始日付*/
+        $date = $request->input('date');
+        $time = $request->input('time');
+        /*締切日時*/
+        $enddate = $request->input('enddate');
+        $endtime = $request->input('endtime');
+
+        $start_date_before = $date .$time;
+        $end_date_before = $enddate .$endtime;
+
+        $start_date = date('Y-m-d H:i:s' ,strtotime($start_date_before));
+        $end_date = date('Y-m-d H:i:s' ,strtotime($end_date_before));
+
+        $value = [
+            'title'=>$title,
+            'question'=>$question,
+            'answer1'=>$answer1,
+            'answer2'=>$answer2,
+            'answer3'=>$answer3,
+            'start_date'=>$start_date,
+            'end_date'=>$end_date,
+            ];
+
+        DB::table('question')->insert($value);
+        return view('admin.betregisterpost');
+    }
 }
