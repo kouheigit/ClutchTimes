@@ -11,6 +11,8 @@
                     <a href="{{ route('admin.addnews') }}">記事の追加</a>
                     <br>
                     <a href="{{ route('admin.deletearticle') }}">記事の削除</a>
+                    <br>
+                    <a href="{{ route('admin.bet') }}">Bet</a>
 
 
                 @if (session('status'))

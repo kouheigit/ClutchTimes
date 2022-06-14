@@ -68,6 +68,8 @@ class HomeController extends Controller
         $complete ="投稿が完了しました";
         return view('admin.addnews',compact('complete'));
     }
+
+    //記事削除
     public function deletearticle(Request $request)
     {
 
@@ -77,12 +79,17 @@ class HomeController extends Controller
         $news = DB::table('admin_news_table')->where('date', '<=', $today)->orderBy('date', 'desc')->get();
         return view('admin.deletearticle', compact('news', 'hidden_news'));
     }
-
     public function deletemessage(Request $request){
         $deleteid = $request->input('deleteid');
         $deletename = DB::table('admin_news_table')->where('id',$deleteid)->value('title');
         DB::table('admin_news_table')->where('id',$deleteid)->delete();
         return view('admin.deletemessage',compact('deletename'));
     }
-
+    //betページ
+    public function bet(Request $request){
+        return view('admin.bet');
+    }
+    public function betregister(Request $request){
+        return view('admin.betregister');
+    }
 }
