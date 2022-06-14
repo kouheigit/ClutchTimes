@@ -4,6 +4,9 @@
     <h2>Bet</h2>
     <form method="POST" action="{{ route('admin.betregisterpost') }}">
         @csrf
+        @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
    <h3>試合情報</h3>
    <input type="text" name="title" required>
    <h3>予想問題</h3>

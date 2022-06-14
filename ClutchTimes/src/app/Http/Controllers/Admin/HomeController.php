@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;  // Adminを追加
 use App\Http\Requests\addnewsRequest;
+use App\Http\Requests\betregisterRequest;
 //use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -93,7 +94,7 @@ class HomeController extends Controller
         return view('admin.betregister');
     }
     //
-    public function betregisterpost(Request $request){
+    public function betregisterpost(betregisterRequest $request){
 
         $title = $request->input('title');
         $question = $request->input('question');
