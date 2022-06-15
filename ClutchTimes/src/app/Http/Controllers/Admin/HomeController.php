@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;  // Adminを追加
-use App\Http\Requests\addnewsRequest;
+use App\Http\Requests\AddnewsRequest;
 use App\Http\Requests\BetregisterRequest;
 //use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -33,7 +33,7 @@ class HomeController extends Controller
     {
         return view('admin.addnews');
     }
-    public function  addnewspost(addnewsRequest $request)
+    public function  addnewspost(AddnewsRequest $request)
     {
 
         //値を取得
