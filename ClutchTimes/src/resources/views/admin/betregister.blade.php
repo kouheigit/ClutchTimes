@@ -10,22 +10,22 @@
    <h3>試合情報</h3>
    <input type="text" name="title" required>
    <h3>予想問題</h3>
-   <textarea name="question"rows="6" cols="40" required></textarea>
+   <textarea name="question"rows="6" cols="40" value="{{old('question')}}" required></textarea>
     <h3>選択肢</h3>
-    <input type="text" name="answer1" required>
+    <input type="text" name="answer1"value="{{old('answer1')}}" required>
     <br>
     <br>
-    <input type="text" name="answer2" required>
+    <input type="text" name="answer2"value="{{old('answer2')}}" required>
     <br>
     <br>
-    <input type="text" name="answer3" >
+    <input type="text" name="answer3"value="{{old('answer3')}}" >
     <h3>投稿時刻</h3>
-    <input type="date" id="date" name="date"  required/>
-    <input type="time" id="time" name="time"  required/>
+    <input type="date" id="date" name="date" value="{{old('date')}}"  required/>
+    <input type="time" id="time" name="time"value="{{old('time')}}"  required/>
     <br>
     <h3>締切時刻</h3>
-    <input type="date" id="enddate" name="enddate"  required/>
-    <input type="time" id="endtime" name="endtime"  required/>
+    <input type="date" id="enddate" name="enddate"value="{{old('enddate')}}"  required/>
+    <input type="time" id="endtime" name="endtime" value="{{old('endtime')}}" required/>
         <br>
         <br>
         <input type="submit" value="投稿する">
