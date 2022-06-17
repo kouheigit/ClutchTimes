@@ -28,6 +28,9 @@ Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/home/article', [App\Http\Controllers\HomeController::class, 'article'])->name('auth.article');
+Route::get('/home/betshow', [App\Http\Controllers\HomeController::class, 'betshow'])->name('auth.betshow');
+Route::post('/home/betshow', [App\Http\Controllers\HomeController::class, 'betshowpost']);
+Route::get('/home/vote', [App\Http\Controllers\HomeController::class, 'vote'])->name('auth.vote');
 
 
 

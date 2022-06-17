@@ -123,7 +123,7 @@ class HomeController extends Controller
             'end_date'=>$end_date,
             ];
 
-        DB::table('question')->insert($value);
+        DB::table('questions')->insert($value);
         return view('admin.betregisterpost');
     }
 }

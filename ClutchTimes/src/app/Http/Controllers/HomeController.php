@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Admin;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -103,5 +104,33 @@ class HomeController extends Controller
 
         return view('auth.article',compact('title','text'));*/
 
+    }
+    //bet画面一覧を取得
+    public function betshow(Request $request){
+        $name = Auth::user()->email;
+        $id = Auth::user()->id;
+        $today = date("Y-m-d H:i:s");
+        $questions = DB::table('questions')->where('start_date', '<=', $today)->where('end_date', '>', $today)->orderBy('start_date', 'desc')->limit(3)->get();
+       // $questions = DB::table('questions')->get();
+        return view('auth.betshow',compact('questions'));
+    }
+    public function betshowpost(Request $request){
+        session_start();
+        $id = $request->input('id');
+        $_SESSION['id'] = $id;
+        return redirect('home/vote');
+    }
+    public function vote(Request $request){
+        session_start();
+        $id = $_SESSION['id'];
+        if (empty($id)) {
+            return redirect('home/betshow');
+        }elseif(is_null($id)){
+            return redirect('home/betshow');
+        }
+        $id;
+        
+        $_SESSION['id'] = null;
+        return view('auth.vote',compact('id',));
     }
 }
