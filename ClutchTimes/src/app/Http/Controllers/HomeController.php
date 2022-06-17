@@ -142,23 +142,31 @@ class HomeController extends Controller
     }
     public function votepost(Request $request){
         //ユーザーのIDを取得
-        $error_message = null;
+
         $user_id = $request->input('user_id');
         //問題のidを取得
         $question_id = $request->input('question_id');
         $answer = $request->input('answer');
         //クエリビルダで値を検索する同じユーザーが投票できないようにする処理を記述
+        //再度投票禁止処理、不要指示が出たら以下は削除する
+        $test = DB::table('user_answers')->where('user_id','=',$user_id)->Where('question_id','=',$question_id)->value('answer');
+        if($test==null) {
+            //投票内容を挿入する
+            $value = [
+                'user_id' => $user_id,
+                'question_id' => $question_id,
+                'answer' => $answer,
+                'bet_points' => null,
+            ];
+            DB::table('user_answers')->insert($value);
+            $error_message = null;
+        }else{
+            $error_message = "以前に投票されました";
+        }
+        //再度投票禁止処理終了
 
+       // DB::table('user_answers')->insert($value);
 
-        //投票内容を挿入する
-        $value = [
-            'user_id' => $user_id,
-            'question_id' => $question_id,
-            'answer' => $answer,
-            'bet_points' => null,
-        ];
-        DB::table('user_answers')->insert($value);
-
-        return view('auth.votepost');
+        return view('auth.votepost',compact('test','error_message'));
     }
 }
