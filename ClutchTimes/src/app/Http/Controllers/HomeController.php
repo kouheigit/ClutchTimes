@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\Models\Admin;
+use App\Http\Requests\VoteRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use mysql_xdevapi\Table;
 
 class HomeController extends Controller
 {
@@ -107,30 +109,56 @@ class HomeController extends Controller
     }
     //bet画面一覧を取得
     public function betshow(Request $request){
-        $name = Auth::user()->email;
-        $id = Auth::user()->id;
         $today = date("Y-m-d H:i:s");
-        $questions = DB::table('questions')->where('start_date', '<=', $today)->where('end_date', '>', $today)->orderBy('start_date', 'desc')->limit(3)->get();
+        //limit不要
+        $questions = DB::table('questions')->where('start_date', '<=', $today)->where('end_date', '>', $today)->orderBy('start_date', 'desc')->get();
        // $questions = DB::table('questions')->get();
         return view('auth.betshow',compact('questions'));
     }
+
+    /*
     public function betshowpost(Request $request){
         session_start();
         $id = $request->input('id');
         $_SESSION['id'] = $id;
         return redirect('home/vote');
-    }
+    }*/
+    //VoteRequest←一時保留
     public function vote(Request $request){
+        $user_id = Auth::user()->id;
+        $id = $request->input('id');
+        $questions = DB::table('questions')->where('id', $id)->get();
+        /*
         session_start();
+        //バリデをかける
         $id = $_SESSION['id'];
         if (empty($id)) {
             return redirect('home/betshow');
         }elseif(is_null($id)){
             return redirect('home/betshow');
         }
-        $id;
-        
-        $_SESSION['id'] = null;
-        return view('auth.vote',compact('id',));
+        $_SESSION['id'] = null;*/
+        return view('auth.vote',compact('questions','user_id'));
+    }
+    public function votepost(Request $request){
+        //ユーザーのIDを取得
+        $error_message = null;
+        $user_id = $request->input('user_id');
+        //問題のidを取得
+        $question_id = $request->input('question_id');
+        $answer = $request->input('answer');
+        //クエリビルダで値を検索する同じユーザーが投票できないようにする処理を記述
+
+
+        //投票内容を挿入する
+        $value = [
+            'user_id' => $user_id,
+            'question_id' => $question_id,
+            'answer' => $answer,
+            'bet_points' => null,
+        ];
+        DB::table('user_answers')->insert($value);
+
+        return view('auth.votepost');
     }
 }

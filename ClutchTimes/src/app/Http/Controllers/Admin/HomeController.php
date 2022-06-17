@@ -113,14 +113,14 @@ class HomeController extends Controller
         $start_date = date('Y-m-d H:i:s' ,strtotime($start_date_before));
         $end_date = date('Y-m-d H:i:s' ,strtotime($end_date_before));
 
-        $value = [
-            'title'=>$title,
-            'question'=>$question,
-            'answer1'=>$answer1,
-            'answer2'=>$answer2,
-            'answer3'=>$answer3,
-            'start_date'=>$start_date,
-            'end_date'=>$end_date,
+            $value = [
+                'title' => $title,
+                'question' => $question,
+                'answer1' => $answer1,
+                'answer2' => $answer2,
+                'answer3' => $answer3,
+                'start_date' => $start_date,
+                'end_date' => $end_date,
             ];
 
         DB::table('questions')->insert($value);
