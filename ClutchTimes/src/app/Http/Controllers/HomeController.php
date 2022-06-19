@@ -110,10 +110,19 @@ class HomeController extends Controller
     //bet画面一覧を取得
     public function betshow(Request $request){
         $today = date("Y-m-d H:i:s");
-        //limit不要
         $questions = DB::table('questions')->where('start_date', '<=', $today)->where('end_date', '>', $today)->orderBy('start_date', 'desc')->get();
+
+        //---------以下はテスト処理後で消す
+
+       $test =  DB::table('questions')->where('start_date', '<=', $today)->where('end_date', '>', $today)->orderBy('start_date', 'desc')->orderBy('id')->pluck('id');
+
+       foreach($test as $test1){
+           $tests[] = $test;
+       }
+       //--------テスト処理終了---------
+
        // $questions = DB::table('questions')->get();
-        return view('auth.betshow',compact('questions'));
+        return view('auth.betshow',compact('questions','tests'));
     }
 
     /*
@@ -147,8 +156,11 @@ class HomeController extends Controller
         //問題のidを取得
         $question_id = $request->input('question_id');
         $answer = $request->input('answer');
+
+
         //クエリビルダで値を検索する同じユーザーが投票できないようにする処理を記述
-        //再度投票禁止処理、不要指示が出たら以下は削除する
+        //---再度投票禁止処理、不要指示が出たら以下は削除する--
+
         $test = DB::table('user_answers')->where('user_id','=',$user_id)->Where('question_id','=',$question_id)->value('answer');
         if($test==null) {
             //投票内容を挿入する
@@ -163,7 +175,7 @@ class HomeController extends Controller
         }else{
             $error_message = "以前に投票されました";
         }
-        //再度投票禁止処理終了
+        //------再度投票禁止処理終了-------
 
        // DB::table('user_answers')->insert($value);
 

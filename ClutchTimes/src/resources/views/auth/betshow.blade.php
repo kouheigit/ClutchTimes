@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <h1>現在の予想</h1>
+
     @foreach ($questions as $val)
         <h1>{{$val->id}}</h1>
         <form method="GET" id="form1" action="{{ route('auth.vote') }}">
@@ -16,6 +17,10 @@
         </form>
         <br>
     @endforeach
-
+    <!--testとして入れている -->
+    @foreach($tests as $test1)
+        {{$test1}}
+    @endforeach
+   <!--testend -->
     <!--auth.homeのformから取得する-->
 @endsection

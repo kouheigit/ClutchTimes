@@ -16,7 +16,7 @@
             <input type="radio" name="answer" value="answer3">{{$val->answer3}}
             @endif
             <br>
-            <input type="submit" value="投稿する">
+            <input type="submit" value="投票する">
         <p>投票の締切日{{$val->end_date}}</p>
     @endforeach
 
