@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use http\Env\Request;
 use Illuminate\Foundation\Http\FormRequest;
 
-class VoteRequest extends FormRequest
+class HomeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,12 +13,15 @@ class VoteRequest extends FormRequest
      */
     public function authorize()
     {
-        //var_dump($this->path());
-        if ($this->path() =='home/vote'){
+        return true;
+        /*
+        var_dump($this->path());
+        //homeが取得できない
+        if ($this->path() == 'home/article'){
             return true;
-        }else{
+        }else {
             return false;
-        }
+        }*/
     }
 
     /**

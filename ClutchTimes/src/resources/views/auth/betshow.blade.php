@@ -15,12 +15,14 @@
             <p>投票の締切日{{$val->end_date}}</p>
             <input type="submit" value="投票画面へ">
         </form>
+    @endforeach
         <br>
-    @endforeach
+        <br>
     <!--testとして入れている -->
-    @foreach($tests as $test1)
-        {{$test1}}
+    @foreach($show_value as $test4)
+    {{$test4}}
     @endforeach
+
    <!--testend -->
     <!--auth.homeのformから取得する-->
 @endsection

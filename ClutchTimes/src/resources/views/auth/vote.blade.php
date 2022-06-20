@@ -9,6 +9,12 @@
             <h3>user_id→{{$user_id}}</h3>
         <h3>{{$val->title}}</h3>
         <h3>{{$val->question}}</h3>
+            <h1> {{$answer1_title}}{{$show_answer1}}%</h1>
+            <h1> {{$answer2_title}}{{$show_answer2}}%</h1>
+            @if($answer3_title==null)
+            @else
+            <h1> {{$answer3_title}}{{$show_answer3}}%</h1>
+            @endif
             <input type="radio" name="answer" value="answer1"　required>{{$val->answer1}}
             <input type="radio" name="answer" value="answer2">{{$val->answer2}}
             @if($val->answer3 == null)
@@ -18,6 +24,9 @@
             <br>
             <input type="submit" value="投票する">
         <p>投票の締切日{{$val->end_date}}</p>
+            {{$answer1_title}}
+        {{$show_answer1}}
+        {{$show_answer2}}
     @endforeach
 
 @endsection

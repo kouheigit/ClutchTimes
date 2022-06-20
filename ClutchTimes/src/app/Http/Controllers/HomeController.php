@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Http\Requests\VoteRequest;
+use App\Http\Requests\HomeRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -81,7 +82,7 @@ class HomeController extends Controller
         return view('home',compact('showvalue','showvalue1','showvalue2'));*/
     }
     //postに後で変更
-    public function article(Request $request){
+    public function article(HomeRequest $request){
        // $articlevalue = $request->input('id');
         //$id = $request->input('id');
 
@@ -109,20 +110,57 @@ class HomeController extends Controller
     }
     //bet画面一覧を取得
     public function betshow(Request $request){
+
         $today = date("Y-m-d H:i:s");
         $questions = DB::table('questions')->where('start_date', '<=', $today)->where('end_date', '>', $today)->orderBy('start_date', 'desc')->get();
 
         //---------以下はテスト処理後で消す
 
-       $test =  DB::table('questions')->where('start_date', '<=', $today)->where('end_date', '>', $today)->orderBy('start_date', 'desc')->orderBy('id')->pluck('id');
+       $id =  DB::table('questions')->where('start_date', '<=', $today)->where('end_date', '>', $today)->orderBy('start_date', 'desc')->orderBy('id')->pluck('id');
 
-       foreach($test as $test1){
-           $tests[] = $test;
+       foreach($id as $question_id){
+           //質問においての総回答数を取得する
+           $all_answer = DB::table('user_answers')->where('question_id','=',$question_id)->pluck('answer')->count();
+
+           //各回答数を取得する
+           //質問の中の全体数の中のanswer1の割合
+           $answer1 = DB::table('user_answers')->where('question_id','=',$question_id)->where('answer','=','answer1')->pluck('answer')->count();
+           //質問の中の全体数の中のanswer2の割合
+           $answer2 = DB::table('user_answers')->where('question_id','=',$question_id)->where('answer','=','answer2')->pluck('answer')->count();
+           //質問の中の全体数の中のanswer3の割合
+           $answer3 = DB::table('user_answers')->where('question_id','=',$question_id)->where('answer','=','answer3')->pluck('answer')->count();
+
+           //変数名show_は投票率を計算している、answer_は名前を取得している
+           $show_answer1= round($answer1 / $all_answer * 100);
+           $answer1_title = DB::table('questions')->where('id','=',$question_id)->value('answer1');
+           $show_answer2 = round($answer2 / $all_answer * 100);
+           $answer2_title = DB::table('questions')->where('id','=',$question_id)->value('answer2');
+           $show_answer3 = round($answer3 / $all_answer * 100);
+           $answer3_title = DB::table('questions')->where('id','=',$question_id)->value('answer3');
+           $show_answer4 = "next";
+
+           if(empty($answer3_title)){
+               $answer3_title = null;
+               $show_answer3 = null;
+           }
+
+           $show_answer = array($show_answer1,$answer1_title,$show_answer2,$answer2_title,$show_answer3,$answer3_title,$show_answer4);
+           //変数に値を格納する
+           foreach($show_answer as $show_answers){
+               $show_value[] = $show_answers;
+           }
+
+           /*
+           $test6[] = $test;
+           $test6[] = $test1;
+           $test6[] = $test2;
+           $test6[] = $test3;*/
+           //$tests[] = $test1;
        }
        //--------テスト処理終了---------
 
        // $questions = DB::table('questions')->get();
-        return view('auth.betshow',compact('questions','tests'));
+        return view('auth.betshow',compact('questions','show_value'));
     }
 
     /*
@@ -133,10 +171,30 @@ class HomeController extends Controller
         return redirect('home/vote');
     }*/
     //VoteRequest←一時保留
-    public function vote(Request $request){
+    public function vote(VoteRequest $request){
         $user_id = Auth::user()->id;
         $id = $request->input('id');
         $questions = DB::table('questions')->where('id', $id)->get();
+
+
+        $all_answer = DB::table('user_answers')->where('question_id','=',$id)->pluck('answer')->count();
+        $answer1 = DB::table('user_answers')->where('question_id','=',$id)->where('answer','=','answer1')->pluck('answer')->count();
+        $show_answer1= round($answer1 / $all_answer * 100);
+        $answer1_title = DB::table('questions')->where('id','=',$id)->value('answer1');
+
+
+        $answer2 = DB::table('user_answers')->where('question_id','=',$id)->where('answer','=','answer2')->pluck('answer')->count();
+        $show_answer2= round($answer2 / $all_answer * 100);
+        $answer2_title = DB::table('questions')->where('id','=',$id)->value('answer2');
+
+        $answer3 = DB::table('user_answers')->where('question_id','=',$id)->where('answer','=','answer3')->pluck('answer')->count();
+        $show_answer3= round($answer3 / $all_answer * 100);
+        $answer3_title = DB::table('questions')->where('id','=',$id)->value('answer3');
+
+        if(empty($answer3_title)){
+            $answer3_title = null;
+            $show_answer3 = null;
+        }
         /*
         session_start();
         //バリデをかける
@@ -147,7 +205,7 @@ class HomeController extends Controller
             return redirect('home/betshow');
         }
         $_SESSION['id'] = null;*/
-        return view('auth.vote',compact('questions','user_id'));
+        return view('auth.vote',compact('questions','user_id','show_answer1','show_answer2','show_answer3','answer1_title','answer2_title','answer3_title'));
     }
     public function votepost(Request $request){
         //ユーザーのIDを取得
