@@ -114,11 +114,19 @@ class HomeController extends Controller
         $today = date("Y-m-d H:i:s");
         $questions = DB::table('questions')->where('start_date', '<=', $today)->where('end_date', '>', $today)->orderBy('start_date', 'desc')->get();
 
+
+        foreach($questions as $question){
+            //idを全て取得->で取得
+            $question_id = $question->id;
+   //     }
+
+
         //---------以下はテスト処理後で消す
 
-       $id =  DB::table('questions')->where('start_date', '<=', $today)->where('end_date', '>', $today)->orderBy('start_date', 'desc')->orderBy('id')->pluck('id');
+//       $id =  DB::table('questions')->where('start_date', '<=', $today)->where('end_date', '>', $today)->orderBy('start_date', 'desc')->orderBy('id')->pluck('id');
 
-       foreach($id as $question_id){
+
+     //  foreach($id as $question_id){
            //質問においての総回答数を取得する
            $all_answer = DB::table('user_answers')->where('question_id','=',$question_id)->pluck('answer')->count();
 
@@ -131,23 +139,41 @@ class HomeController extends Controller
            $answer3 = DB::table('user_answers')->where('question_id','=',$question_id)->where('answer','=','answer3')->pluck('answer')->count();
 
            //変数名show_は投票率を計算している、answer_は名前を取得している
-           $show_answer1= round($answer1 / $all_answer * 100);
+           //answer_はクイズのタイトル名を取得する
+           //
+           if($answer1==0){
+               $show_answer1 = 0;
+           }else{
+               $show_answer1 = round($answer1 / $all_answer * 100);
+           }
+
            $answer1_title = DB::table('questions')->where('id','=',$question_id)->value('answer1');
-           $show_answer2 = round($answer2 / $all_answer * 100);
+
+           if($answer2==0){
+               $show_answer2 = 0;
+           }else{
+               $show_answer2 = round($answer2 / $all_answer * 100);
+           }
            $answer2_title = DB::table('questions')->where('id','=',$question_id)->value('answer2');
-           $show_answer3 = round($answer3 / $all_answer * 100);
+
+
+
            $answer3_title = DB::table('questions')->where('id','=',$question_id)->value('answer3');
            $show_answer4 = "next";
 
            if(empty($answer3_title)){
                $answer3_title = null;
                $show_answer3 = null;
+           }elseif($answer3==0){
+               $show_answer3 = 0;
+           }else{
+               $show_answer3 = round($answer3 / $all_answer * 100);
            }
 
            $show_answer = array($show_answer1,$answer1_title,$show_answer2,$answer2_title,$show_answer3,$answer3_title,$show_answer4);
            //変数に値を格納する
            foreach($show_answer as $show_answers){
-               $show_value[] = $show_answers;
+               $show_value[$question_id] = $show_answers;
            }
 
            /*
@@ -179,21 +205,40 @@ class HomeController extends Controller
 
         $all_answer = DB::table('user_answers')->where('question_id','=',$id)->pluck('answer')->count();
         $answer1 = DB::table('user_answers')->where('question_id','=',$id)->where('answer','=','answer1')->pluck('answer')->count();
-        $show_answer1= round($answer1 / $all_answer * 100);
+
+        if($answer1==0){
+            $show_answer1 = 0;
+        }else{
+            $show_answer1= round($answer1 / $all_answer * 100);
+        }
+
         $answer1_title = DB::table('questions')->where('id','=',$id)->value('answer1');
 
 
         $answer2 = DB::table('user_answers')->where('question_id','=',$id)->where('answer','=','answer2')->pluck('answer')->count();
-        $show_answer2= round($answer2 / $all_answer * 100);
+
+        if($answer2==0){
+           $show_answer2 =0;
+       }else{
+           $show_answer2= round($answer2 / $all_answer * 100);
+       }
+
         $answer2_title = DB::table('questions')->where('id','=',$id)->value('answer2');
 
+
         $answer3 = DB::table('user_answers')->where('question_id','=',$id)->where('answer','=','answer3')->pluck('answer')->count();
-        $show_answer3= round($answer3 / $all_answer * 100);
+
+        //$show_answer3 = round($answer3 / $all_answer * 100);
+
         $answer3_title = DB::table('questions')->where('id','=',$id)->value('answer3');
 
         if(empty($answer3_title)){
             $answer3_title = null;
             $show_answer3 = null;
+        }elseif($answer3==0){
+            $show_answer3 = 0;
+        }else {
+            $show_answer3 = round($answer3 / $all_answer * 100);
         }
         /*
         session_start();

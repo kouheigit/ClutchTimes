@@ -4,7 +4,7 @@
 
     @foreach ($questions as $val)
         <h1>{{$val->id}}</h1>
-        <form method="GET" id="form1" action="{{ route('auth.vote') }}">
+        <form method="POST" id="form1" action="{{ route('auth.vote') }}">
             @csrf
             <input type="hidden" name="id" value="{{$val->id}}">
             <h3>{{$val->title}}</h3>

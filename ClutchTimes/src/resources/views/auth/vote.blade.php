@@ -23,10 +23,9 @@
             @endif
             <br>
             <input type="submit" value="投票する">
+            <br>
+            <br>
         <p>投票の締切日{{$val->end_date}}</p>
-            {{$answer1_title}}
-        {{$show_answer1}}
-        {{$show_answer2}}
     @endforeach
 
 @endsection
