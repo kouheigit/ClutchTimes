@@ -14,7 +14,6 @@ class VoteRequest extends FormRequest
      */
     public function authorize()
     {
-        var_dump($this->path());
         if ($this->path() =='home/vote'){
             return true;
         }else{
