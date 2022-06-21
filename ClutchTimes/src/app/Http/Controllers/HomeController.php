@@ -144,6 +144,7 @@ class HomeController extends Controller
                 }
             }
 
+
             if($all_answer==0){
                 $show_answer1 = 0;
             }else{
@@ -180,11 +181,74 @@ class HomeController extends Controller
     }*/
     //VoteRequest←一時保留
     public function vote(VoteRequest $request){
+
         $user_id = Auth::user()->id;
         $id = $request->input('id');
+        //取得したIDを元に
         $questions = DB::table('questions')->where('id', $id)->get();
+        $show_value = [];
+
+        foreach ($questions as $question) {
+            //ここで問題のidや選択肢の名前を出力する
+            $question_id = $question->id;
+            $answer1_title = $question->answer1;
+            $answer2_title = $question->answer2;
+            $answer3_title = $question->answer3;
+
+            //答案を格納する変数を取得
+            $all_answer = 0;
+            $answer1 = 0;
+            $answer2 = 0;
+            $answer3 = 0;
+
+            //該当するクイズIDの全ての値を取得する
+
+            $answers = DB::table('user_answers')->where('question_id', $question_id)->get();
 
 
+            foreach ($answers as $answer) {
+                 $all_answer++;
+                //選択肢1のみを取得
+                if($answer->answer == 'answer1'){
+                    $answer1++;
+                }
+                //選択肢2のみを取得
+                if($answer->answer =='answer2'){
+                    $answer2++;
+                }
+                //選択肢3のみを取得
+                if($answer->answer =='answer3'){
+                    $answer3++;
+                }
+            }
+
+            if($all_answer==0){
+                $show_answer1 = 0;
+            }else{
+                $show_answer1 = round($answer1 / $all_answer * 100);
+            }
+            if($all_answer==0){
+                $show_answer2 = 0;
+            }else{
+                $show_answer2 = round($answer2 / $all_answer * 100);
+            }
+            if(empty($answer3_title)){
+                $answer3_title = null;
+                $show_answer3 = null;
+            }elseif($all_answer==0){
+                $show_answer3 = 0;
+            }else{
+                $show_answer3 = round($answer3 / $all_answer * 100);
+            }
+            $show_value[$question_id] = array($show_answer1,$show_answer2,$show_answer3);
+        }
+        //--------テスト処理終了---------
+
+        // $questions = DB::table('questions')->get();
+        return view('auth.betshow',compact('questions','show_value'));
+
+
+/*
         $all_answer = DB::table('user_answers')->where('question_id','=',$id)->pluck('answer')->count();
         $answer1 = DB::table('user_answers')->where('question_id','=',$id)->where('answer','=','answer1')->pluck('answer')->count();
 
@@ -222,18 +286,11 @@ class HomeController extends Controller
         }else {
             $show_answer3 = round($answer3 / $all_answer * 100);
         }
-        /*
-        session_start();
-        //バリデをかける
-        $id = $_SESSION['id'];
-        if (empty($id)) {
-            return redirect('home/betshow');
-        }elseif(is_null($id)){
-            return redirect('home/betshow');
-        }
-        $_SESSION['id'] = null;*/
+
         return view('auth.vote',compact('questions','user_id','show_answer1','show_answer2','show_answer3','answer1_title','answer2_title','answer3_title'));
+  */
     }
+
     public function votepost(Request $request){
         //ユーザーのIDを取得
 
