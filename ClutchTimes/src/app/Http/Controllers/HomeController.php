@@ -180,7 +180,7 @@ class HomeController extends Controller
         return redirect('home/vote');
     }*/
     //VoteRequest←一時保留
-    public function vote(VoteRequest $request){
+    public function vote(Request $request){
 
         $user_id = Auth::user()->id;
         $id = $request->input('id');
@@ -245,7 +245,7 @@ class HomeController extends Controller
         //--------テスト処理終了---------
 
         // $questions = DB::table('questions')->get();
-        return view('auth.betshow',compact('questions','show_value'));
+        return view('auth.vote',compact('questions','show_value','user_id'));
 
 
 /*
@@ -291,7 +291,7 @@ class HomeController extends Controller
   */
     }
 
-    public function votepost(Request $request){
+    public function votepost(VoteRequest $request){
         //ユーザーのIDを取得
 
         $user_id = $request->input('user_id');

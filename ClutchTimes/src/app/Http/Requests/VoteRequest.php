@@ -14,11 +14,7 @@ class VoteRequest extends FormRequest
      */
     public function authorize()
     {
-        if ($this->path() =='home/vote'){
-            return true;
-        }else{
-            return false;
-        }
+        return true;
     }
 
     /**
@@ -29,7 +25,17 @@ class VoteRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'user_id'=>'required',
+            'question_id'=>'required',
+            'answer'=>'required',
+        ];
+    }
+
+    public function messages(){
+        return [
+            'user_id.required'=>'この項目への入力は必須です',
+            'question_id.required'=>'この項目への入力は必須です',
+            'answer.required'=>'この項目への入力は必須です',
         ];
     }
 }
