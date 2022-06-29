@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\Models\Admin;
+use App\Models\AdminNews;
+use App\Models\UserAnswer;
 use App\Http\Requests\VoteRequest;
 use App\Http\Requests\HomeRequest;
+use App\Models\Question;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -28,6 +31,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        //2022/6月29日今日はこのページの編集で終わり
         $today = date("Y-m-d H:i:s");
         $news = DB::table('admin_news_table')->where('date', '<=', $today)->orderBy('date', 'desc')->limit(3)->get();
         return view('home',compact('news'));
@@ -87,7 +91,8 @@ class HomeController extends Controller
         //$id = $request->input('id');
 
         $id = $request->input('articlevalue');
-        $news = DB::table('admin_news_table')->where('id', $id)->get();
+       // $news = DB::table('admin_news_table')->where('id', $id)->get();
+        $news = AdminNews::where('admin_news_table')->where('id', $id)->get();
         return view('auth.article',compact('news'));
         //値を取得する
         /*元コード【除外】
@@ -113,7 +118,7 @@ class HomeController extends Controller
 
         $today = date("Y-m-d H:i:s");
 
-        $questions = DB::table('questions')->where('start_date', '<=', $today)->where('end_date', '>', $today)->orderBy('start_date', 'desc')->get();
+        $questions = Question::where('start_date', '<=', $today)->where('end_date', '>', $today)->orderBy('start_date', 'desc')->get();
 
         $show_value = [];
         foreach($questions as $question){
@@ -122,7 +127,7 @@ class HomeController extends Controller
             $answer1_title = $question->answer1;
             $answer2_title = $question->answer2;
             $answer3_title = $question->answer3;
-//            $show_answer4 = "next";
+   //         $show_answer4 = "next";
 
             $all_answer = 0;
             $answer1 = 0;
@@ -130,7 +135,7 @@ class HomeController extends Controller
             $answer3 = 0;
 
             // question_idでuser_answersを取得する
-            $answers = DB::table('user_answers')->where('question_id', $question_id)->get();
+            $answers = UserAnswer::where('question_id', $question_id)->get();
             foreach($answers as $answer) {
                 $all_answer++;
                 if ($answer->answer == 'answer1') {
@@ -185,7 +190,7 @@ class HomeController extends Controller
         $user_id = Auth::user()->id;
         $id = $request->input('id');
         //取得したIDを元に
-        $questions = DB::table('questions')->where('id', $id)->get();
+        $questions = Question::where('id', $id)->get();
         $show_value = [];
 
         foreach ($questions as $question) {
@@ -203,7 +208,7 @@ class HomeController extends Controller
 
             //該当するクイズIDの全ての値を取得する
 
-            $answers = DB::table('user_answers')->where('question_id', $question_id)->get();
+            $answers = UserAnswer::where('question_id', $question_id)->get();
 
 
             foreach ($answers as $answer) {
@@ -303,7 +308,7 @@ class HomeController extends Controller
         //クエリビルダで値を検索する同じユーザーが投票できないようにする処理を記述
         //---再度投票禁止処理、不要指示が出たら以下は削除する--
 
-        $test = DB::table('user_answers')->where('user_id','=',$user_id)->Where('question_id','=',$question_id)->value('answer');
+        $test = UserAnswer::where('user_id','=',$user_id)->Where('question_id','=',$question_id)->value('answer');
         if($test==null) {
             //投票内容を挿入する
             $value = [
