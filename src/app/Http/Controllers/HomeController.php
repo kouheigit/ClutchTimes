@@ -33,7 +33,7 @@ class HomeController extends Controller
     {
         //2022/6月29日今日はこのページの編集で終わり
         $today = date("Y-m-d H:i:s");
-        $news = DB::table('admin_news_table')->where('date', '<=', $today)->orderBy('date', 'desc')->limit(3)->get();
+        $news = AdminNews::where('date', '<=', $today)->orderBy('date', 'desc')->limit(3)->get();
         return view('home',compact('news'));
 
         /*エラーが出るところを見つけ次第 Slackで送られてきたものに修正する個々に記述せよ
@@ -87,12 +87,9 @@ class HomeController extends Controller
     }
     //postに後で変更
     public function article(HomeRequest $request){
-       // $articlevalue = $request->input('id');
-        //$id = $request->input('id');
 
         $id = $request->input('articlevalue');
-       // $news = DB::table('admin_news_table')->where('id', $id)->get();
-        $news = AdminNews::where('admin_news_table')->where('id', $id)->get();
+        $news = AdminNews::where('id', $id)->get();
         return view('auth.article',compact('news'));
         //値を取得する
         /*元コード【除外】
@@ -247,9 +244,7 @@ class HomeController extends Controller
             }
             $show_value[$question_id] = array($show_answer1,$show_answer2,$show_answer3);
         }
-        //--------テスト処理終了---------
 
-        // $questions = DB::table('questions')->get();
         return view('auth.vote',compact('questions','show_value','user_id'));
 
 
@@ -317,6 +312,7 @@ class HomeController extends Controller
                 'answer' => $answer,
                 'bet_points' => null,
             ];
+           // DB::table('user_answers')->insert($value);(後に確認)
             DB::table('user_answers')->insert($value);
             $error_message = null;
         }else{
