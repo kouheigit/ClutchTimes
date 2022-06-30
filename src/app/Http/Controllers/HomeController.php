@@ -312,8 +312,8 @@ class HomeController extends Controller
                 'answer' => $answer,
                 'bet_points' => null,
             ];
-           // DB::table('user_answers')->insert($value);(後に確認)
-            DB::table('user_answers')->insert($value);
+           // DB::table('user_answers')->insert($value);(後で確認)
+            UserAnswer::insert($value);
             $error_message = null;
         }else{
             $error_message = "以前に投票されました";

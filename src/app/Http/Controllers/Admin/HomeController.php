@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Admin;  // Adminを追加
+use App\Models\AdminNews;
+use App\Models\UserAnswer;
+use App\Models\Question;
 use App\Http\Requests\AddnewsRequest;
 use App\Http\Requests\BetregisterRequest;
 //use Illuminate\Support\Facades\Validator;
@@ -63,7 +66,9 @@ class HomeController extends Controller
             'date'=>$date,
             'text'=>$comment,
         ];
-        DB::table('admin_news_table')->insert($value);
+        //この書き方でOK
+        AdminNews::insert($value);
+
 
         $complete ="投稿が完了しました";
         return view('admin.addnews',compact('complete'));
@@ -74,15 +79,15 @@ class HomeController extends Controller
     {
 
         $today = date("Y-m-d H:i:s");
-        // $news = DB::table('admin_news_table')->where('date', '<=', $today)->orderBy('date', 'desc')->limit(3)->get();
-        $hidden_news = DB::table('admin_news_table')->where('date', '>', $today)->orderBy('date', 'desc')->get();
-        $news = DB::table('admin_news_table')->where('date', '<=', $today)->orderBy('date', 'desc')->get();
+        $hidden_news = AdminNews::where('date', '>', $today)->orderBy('date', 'desc')->get();
+        $news = AdminNews::where('date', '<=', $today)->orderBy('date', 'desc')->get();
+
         return view('admin.deletearticle', compact('news', 'hidden_news'));
     }
     public function deletemessage(Request $request){
         $deleteid = $request->input('deleteid');
-        $deletename = DB::table('admin_news_table')->where('id',$deleteid)->value('title');
-        DB::table('admin_news_table')->where('id',$deleteid)->delete();
+        $deletename = AdminNews::where('id',$deleteid)->value('title');
+        AdminNews::where('id',$deleteid)->delete();
         return view('admin.deletemessage',compact('deletename'));
     }
     //betページ
@@ -123,7 +128,8 @@ class HomeController extends Controller
                 'end_date' => $end_date,
             ];
 
-        DB::table('questions')->insert($value);
+        Question::insert($value);
+        //DB::table('questions')->insert($value);
         return view('admin.betregisterpost');
     }
 }

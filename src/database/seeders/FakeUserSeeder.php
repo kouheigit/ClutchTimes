@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -23,7 +24,8 @@ class FakeUserSeeder extends Seeder
                 'email' => $faker->email,
                 'password' => bcrypt('test7777'),
             ];
-            DB::table('users')->insert($value);
+            User::insert($value);
+            //DB::table('users')->insert($value);
         }
     }
 }
