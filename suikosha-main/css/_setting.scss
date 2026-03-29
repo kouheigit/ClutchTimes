@@ -1,0 +1,72 @@
+/* _setting CSS */
+@use "sass:math";
+
+// _____________________________カラー
+$c_blue1: #347cbe;
+$c_red1: #ff1e3b;
+$c_red2: #FCE4E6;
+$c_black1: #333;
+$c_black2: #666;
+$c_gray1: #cecece;
+$c_gray2: #f3f3f3;
+$c_gray3: #f9f9f9;
+$c_gray4: #e3e3e3;
+
+// _____________________________ボックスシャドウ
+$box_shadow: 0 0 7px 0 rgba(0, 0, 0, 0.2);
+$box_shadow02: 25px 25px 0 0 rgba(151,158,167,0.2);
+$box_shadow_sp: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+$box_shadow02_sp: 5px 5px 0 0 rgba(151,158,167,0.2);
+
+// _____________________________フォント
+$font_min: 'EB Garamond', serif, '游明朝' , 'Yu Mincho' , '游明朝体' , 'YuMincho' , 'ヒラギノ明朝 Pro W3' , 'Hiragino Mincho Pro';//明朝体
+$font_number: 'Droid Serif', serif;//数字
+
+// _____________________________ミックスイン
+
+// @include cf;
+@mixin cf {
+	&:after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+}
+// @include ri;
+@mixin ri {
+	display: block;
+	height: 0;
+	overflow: hidden;
+	background-repeat: no-repeat;
+}
+// @include ab;
+@mixin ab($width:10px, $color:#000, $stlk:1px, $dirc:1) {
+	$bod: $stlk solid $color;
+	content: '';
+	display: block;
+	width: $width;
+	height: $width;
+	transform: rotate(45deg);
+	@if $dirc == 1 {
+		border-top: $bod;
+		border-right: $bod;
+	}
+	@if $dirc == 2 {
+		border-left: $bod;
+		border-bottom: $bod;
+	}
+	@if $dirc == 3 {
+		border-left: $bod;
+		border-top: $bod;
+	}
+	@if $dirc == 4 {
+		border-right: $bod;
+		border-bottom: $bod;
+	}
+}
+
+
+// _____________________________function
+@function vw($num, $denom:750) {
+	@return (math.div($num, math.div($denom,100))*1vw);
+}

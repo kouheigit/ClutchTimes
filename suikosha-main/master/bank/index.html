@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<html lang="ja-JP" prefix="og: http://ogp.me/ns#">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<![endif]-->
+<meta content="telephone=no" name="format-detection">
+<meta name="viewport" content="width=device-width">
+
+<title>page｜title</title>
+<meta name="description" content="description">
+
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+</head>
+<body>
+<div id="wrapper">
+	<header id="header" class=" c_hov_wrap1">
+		<nav>
+			<div class="nav1 flex jcsb c_wrap1">
+				<h1><img src="../../images/logo1.svg" alt="SUIKOU"> 業務管理システム</h1>
+				<ul class="flex">
+					<li><span>アカウント：〇〇〇〇〇</span></li>
+					<li><a href="">ログアウト</a></li>
+				</ul>
+			</div>
+			<div class="nav2">
+				<ul class="flex jcc c_wrap2">
+					<li><a href="">派遣管理</a></li>
+					<li><a href="">設計管理</a></li>
+					<li><a href="">⽉報管理</a></li>
+					<li><a href="">外注⽀払管理</a></li>
+					<li><a href="">⼊⾦管理</a></li>
+					<li><a href="">請求管理</a></li>
+					<li class="on">
+						<a href="">マスタ管理</a>
+						<ul>
+							<li><a href="">先意得</a></li>
+							<li><a href="">現場</a></li>
+							<li><a href="">支店</a></li>
+							<li><a href="">部門</a></li>
+							<li><a href="">社員</a></li>
+							<li><a href="">銀行</a></li>
+							<li><a href="">外注</a></li>
+						</ul>
+					</li>
+					<li><a href="">表計算出⼒</a></li>
+					<li><a href="">PCAデータ</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<div id="contents" class="c_wrap1">
+		<div class="search_wrap c_hov_wrap1">
+			<ul class="btn_warp flex jcfe">
+				<li>
+					<a class="c_btn1 _pdf _icon_r" href="">PDF出⼒<i class="i_pdf"></i></a>
+				</li>
+				<li>
+					<a class="c_btn1 _new _icon_r" href="">新規登録<i class="i_plus"></i></a>
+				</li>
+			</ul>
+			<div class="form_wrap">
+				<div class="inner flex jcc">
+					<div class="input_box flex aic">
+						<span>銀行</span>
+						<input type="text" class="_s60 textc" value="12345">
+						<input type="text" class="_s160" value="">
+					</div>
+					<div class="input_box flex aic">
+						<span>支店番号</span>
+						<input type="text" class="_s60 textc" value="">
+					</div>
+					<div class="input_box flex aic">
+						<span>支店名</span>
+						<input type="text" class="_s160" value="">
+					</div>
+				</div>
+				<div class="inner flex jcc">
+					<div class="input_box flex aic">
+						<span>口座区分</span>
+						<select>
+							<option></option>
+							<option>普通</option>
+							<option>当座</option>
+						</select>
+					</div>
+					<div class="input_box flex aic">
+						<span>口座番号</span>
+						<input type="text" class="_s80" value="">
+					</div>
+					<div class="input_box flex aic">
+						<span>名義</span>
+						<input type="text" class="_s280" value="">
+					</div>
+				</div>
+				<p class="submit textc"><button class="c_btn1 _icon _search _icon_r"><span>検 索</span><i class="i_search"></i></button></p>
+			</div>
+		</div>
+		<div class="result_list_info flex jcsb aic c_hov_wrap1">
+			<p class="count">500件中1〜10件</p>
+			<ul class="page_list flex aic">
+				<li class="arrow"><a href=""><<</a></li>
+				<li class="arrow"><a href=""><</a></li>
+				<li><span>1</span></li>
+				<li><a href="">2</a></li>
+				<li><a href="">3</a></li>
+				<li><a href="">4</a></li>
+				<li><a href="">5</a></li>
+				<li><a href="">6</a></li>
+				<li><a href="">7</a></li>
+				<li><a href="">8</a></li>
+				<li><a href="">9</a></li>
+				<li><a href="">10</a></li>
+				<li class="arrow"><a href="">></a></li>
+				<li class="arrow"><a href="">>></a></li>
+			</ul>
+		</div>
+		<div class="result_wrap c_hov_wrap1">
+			<table>
+				<colgroup>
+					<col style="width: 50px;">
+					<col style="width: 50px;">
+					<col style="width: 100px;">
+					<col style="width: 50px;">
+					<col style="width: 50px;">
+					<col style="width: 50px;">
+					<col style="width: 100px;">
+					<col style="width: 60px;">
+				</colgroup>
+				<thead>
+					<tr>
+						<th><a href=""><span>番号<span class="arrow _down">▼</span></span></a></th>
+						<th><a href=""><span>登録日</span></a></th>
+						<th><a href=""><span>銀行名</span></a></th>
+						<th><a href=""><span>支店番号</span></a></th>
+						<th><a href=""><span>口座区分</span></a></th>
+						<th><a href=""><span>口座番号</span></a></th>
+						<th><a href=""><span>名義</span></a></th>
+						<th><span>編集</span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="textc">0072</td>
+						<td class="textc">2021/8/20</td>
+						<td>銀行名銀行名銀行名</td>
+						<td class="textc">016</td>
+						<td class="textc">普通</td>
+						<td class="textc">1234567</td>
+						<td>名義名義名義</td>
+						<td class="btn"><a href="">編集<i class="i_pen"></i></a></td>
+					</tr>
+					<tr>
+						<td class="textc">0072</td>
+						<td class="textc">2021/8/20</td>
+						<td>銀行名銀行名銀行名</td>
+						<td class="textc">016</td>
+						<td class="textc">普通</td>
+						<td class="textc">1234567</td>
+						<td>名義名義名義</td>
+						<td class="btn"><a href="">編集<i class="i_pen"></i></a></td>
+					</tr>
+					<tr>
+						<td class="textc">0072</td>
+						<td class="textc">2021/8/20</td>
+						<td>銀行名銀行名銀行名</td>
+						<td class="textc">016</td>
+						<td class="textc">普通</td>
+						<td class="textc">1234567</td>
+						<td>名義名義名義</td>
+						<td class="btn"><a href="">編集<i class="i_pen"></i></a></td>
+					</tr>
+					<tr>
+						<td class="textc">0072</td>
+						<td class="textc">2021/8/20</td>
+						<td>銀行名銀行名銀行名</td>
+						<td class="textc">016</td>
+						<td class="textc">普通</td>
+						<td class="textc">1234567</td>
+						<td>名義名義名義</td>
+						<td class="btn"><a href="">編集<i class="i_pen"></i></a></td>
+					</tr>
+					<tr>
+						<td class="textc">0072</td>
+						<td class="textc">2021/8/20</td>
+						<td>銀行名銀行名銀行名</td>
+						<td class="textc">016</td>
+						<td class="textc">普通</td>
+						<td class="textc">1234567</td>
+						<td>名義名義名義</td>
+						<td class="btn"><a href="">編集<i class="i_pen"></i></a></td>
+					</tr>
+					<tr>
+						<td class="textc">0072</td>
+						<td class="textc">2021/8/20</td>
+						<td>銀行名銀行名銀行名</td>
+						<td class="textc">016</td>
+						<td class="textc">普通</td>
+						<td class="textc">1234567</td>
+						<td>名義名義名義</td>
+						<td class="btn"><a href="">編集<i class="i_pen"></i></a></td>
+					</tr>
+					<tr>
+						<td class="textc">0072</td>
+						<td class="textc">2021/8/20</td>
+						<td>銀行名銀行名銀行名</td>
+						<td class="textc">016</td>
+						<td class="textc">普通</td>
+						<td class="textc">1234567</td>
+						<td>名義名義名義</td>
+						<td class="btn"><a href="">編集<i class="i_pen"></i></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="result_list_info flex jcsb aic">
+			<ul class="page_list flex aic">
+				<li class="arrow"><a href=""><<</a></li>
+				<li class="arrow"><a href=""><</a></li>
+				<li><span>1</span></li>
+				<li><a href="">2</a></li>
+				<li><a href="">3</a></li>
+				<li><a href="">4</a></li>
+				<li><a href="">5</a></li>
+				<li><a href="">6</a></li>
+				<li><a href="">7</a></li>
+				<li><a href="">8</a></li>
+				<li><a href="">9</a></li>
+				<li><a href="">10</a></li>
+				<li class="arrow"><a href="">></a></li>
+				<li class="arrow"><a href="">>></a></li>
+			</ul>
+			<p></p>
+		</div>
+	</div>
+	<p id="to_top"><a class="c_hov1" href="#wrapper">トップへ戻る</a></p>
+	<p id="f_copy">Copyright © Eiken Foundation of Japan All rights reserved.</p>
+</div>
+
+
+<script src="../../js/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+<script src="../../js/func.js"></script>
+</body>
+</html>

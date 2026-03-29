@@ -1,0 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Test : MonoBehaviour
+{
+    void Start()
+    {
+        // Hello, Worldをコンソールウインドウに表示する
+        Debug.Log("Hello, World");
+    }
+}

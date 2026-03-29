@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_レイヤー_2" data-name="レイヤー 2" xmlns="http://www.w3.org/2000/svg" width="1180" height="1064" viewBox="0 0 1180 1064">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: none;
+      }
+
+      .cls-3 {
+        fill: #ebebeb;
+      }
+
+      .cls-4 {
+        fill: #fff;
+      }
+
+      .cls-5 {
+        fill: #dedede;
+      }
+
+      .cls-6 {
+        font-family: NotoSansCJKjp-Regular-83pv-RKSJ-H, 'Noto Sans CJK JP';
+      }
+
+      .cls-6, .cls-7 {
+        font-size: 12px;
+      }
+
+      .cls-6, .cls-7, .cls-8 {
+        fill: #666;
+      }
+
+      .cls-2 {
+        stroke: #cbcbcb;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-7, .cls-8 {
+        font-family: NotoSansCJKjp-Medium-83pv-RKSJ-H, 'Noto Sans CJK JP';
+        font-weight: 500;
+      }
+
+      .cls-8 {
+        font-size: 15px;
+      }
+    </style>
+  </defs>
+  <g id="_レイヤー_1-2" data-name="レイヤー 1">
+    <rect class="cls-5" y=".5" width="1179.5" height="46.5" rx="5" ry="5"/>
+    <rect class="cls-3" y="76.17" width="1179.5" height="35.25"/>
+    <rect class="cls-3" y="146.75" width="1179.5" height="35.25"/>
+    <rect class="cls-3" y="217.23" width="1179.5" height="35.25"/>
+    <rect class="cls-3" y="287.75" width="1179.5" height="35.25"/>
+    <rect class="cls-3" y="358.25" width="1179.5" height="35.25"/>
+    <text class="cls-8" transform="translate(35.6 28.9)"><tspan x="0" y="0">番号</tspan></text>
+    <text class="cls-8" transform="translate(361.6 28.9)"><tspan x="0" y="0">得意先</tspan></text>
+    <text class="cls-8" transform="translate(708.6 28.9)"><tspan x="0" y="0">末請求金額</tspan></text>
+    <text class="cls-8" transform="translate(873.6 28.9)"><tspan x="0" y="0">外注支払済額</tspan></text>
+    <rect class="cls-4" x=".5" y="40.93" width="1179" height="35.25"/>
+    <rect class="cls-1" x=".5" y="111.42" width="1179" height="35.25"/>
+    <rect class="cls-1" x=".5" y="181.98" width="1179" height="35.25"/>
+    <rect class="cls-1" x=".5" y="252.47" width="1179" height="35.25"/>
+    <rect class="cls-1" x=".5" y="323" width="1179" height="35.25"/>
+    <text class="cls-7" transform="translate(37.6 63.03)"><tspan x="0" y="0">1234</tspan></text>
+    <text class="cls-7" transform="translate(37.6 98.03)"><tspan x="0" y="0">1234</tspan></text>
+    <text class="cls-7" transform="translate(37.6 133.03)"><tspan x="0" y="0">1234</tspan></text>
+    <text class="cls-7" transform="translate(37.6 169.03)"><tspan x="0" y="0">1234</tspan></text>
+    <text class="cls-7" transform="translate(37.6 204.03)"><tspan x="0" y="0">1234</tspan></text>
+    <text class="cls-7" transform="translate(37.6 239.03)"><tspan x="0" y="0">1234</tspan></text>
+    <text class="cls-7" transform="translate(37.6 274.03)"><tspan x="0" y="0">1234</tspan></text>
+    <text class="cls-7" transform="translate(37.6 310.03)"><tspan x="0" y="0">1234</tspan></text>
+    <text class="cls-7" transform="translate(37.6 345.03)"><tspan x="0" y="0">1234</tspan></text>
+    <text class="cls-7" transform="translate(37.6 380.03)"><tspan x="0" y="0">1234</tspan></text>
+    <g>
+      <rect class="cls-3" y="428.74" width="1179.5" height="35.25"/>
+      <rect class="cls-3" y="499.32" width="1179.5" height="35.25"/>
+      <rect class="cls-3" y="569.8" width="1179.5" height="35.25"/>
+      <rect class="cls-3" y="640.32" width="1179.5" height="35.25"/>
+      <rect class="cls-3" y="710.82" width="1179.5" height="35.25"/>
+      <rect class="cls-4" x=".5" y="393.5" width="1179" height="35.25"/>
+      <rect class="cls-1" x=".5" y="463.99" width="1179" height="35.25"/>
+      <rect class="cls-1" x=".5" y="534.55" width="1179" height="35.25"/>
+      <rect class="cls-1" x=".5" y="605.05" width="1179" height="35.25"/>
+      <rect class="cls-1" x=".5" y="675.58" width="1179" height="35.25"/>
+      <text class="cls-7" transform="translate(37.6 415.6)"><tspan x="0" y="0">1234</tspan></text>
+      <text class="cls-7" transform="translate(37.6 450.6)"><tspan x="0" y="0">1234</tspan></text>
+      <text class="cls-7" transform="translate(37.6 485.6)"><tspan x="0" y="0">1234</tspan></text>
+      <text class="cls-7" transform="translate(37.6 521.6)"><tspan x="0" y="0">1234</tspan></text>
+      <text class="cls-7" transform="translate(37.6 556.6)"><tspan x="0" y="0">1234</tspan></text>
+      <text class="cls-7" transform="translate(37.6 591.6)"><tspan x="0" y="0">1234</tspan></text>
+      <text class="cls-7" transform="translate(37.6 626.6)"><tspan x="0" y="0">1234</tspan></text>
+      <text class="cls-7" transform="translate(37.6 662.6)"><tspan x="0" y="0">1234</tspan></text>
+      <text class="cls-7" transform="translate(37.6 697.6)"><tspan x="0" y="0">1234</tspan></text>
+      <text class="cls-7" transform="translate(37.6 732.6)"><tspan x="0" y="0">1234</tspan></text>
+      <rect class="cls-4" y="746.07" width="1179.5" height="35.25"/>
+      <rect class="cls-4" y="816.65" width="1179.5" height="35.25"/>
+      <rect class="cls-4" y="887.13" width="1179.5" height="35.25"/>
+      <rect class="cls-4" y="957.65" width="1179.5" height="35.25"/>
+      <rect class="cls-4" y="1028.15" width="1179.5" height="35.25"/>
+      <rect class="cls-3" x=".5" y="781.32" width="1179" height="35.25"/>
+      <rect class="cls-3" x=".5" y="851.88" width="1179" height="35.25"/>
+      <rect class="cls-3" x=".5" y="922.37" width="1179" height="35.25"/>
+      <rect class="cls-3" x=".5" y="992.9" width="1179" height="35.25"/>
+      <text class="cls-7" transform="translate(37.6 767.93)"><tspan x="0" y="0">1234</tspan></text>
+      <text class="cls-7" transform="translate(37.6 802.93)"><tspan x="0" y="0">1234</tspan></text>
+      <text class="cls-7" transform="translate(37.6 838.93)"><tspan x="0" y="0">1234</tspan></text>
+      <text class="cls-7" transform="translate(37.6 873.93)"><tspan x="0" y="0">1234</tspan></text>
+      <text class="cls-7" transform="translate(37.6 908.93)"><tspan x="0" y="0">1234</tspan></text>
+      <text class="cls-7" transform="translate(37.6 943.93)"><tspan x="0" y="0">1234</tspan></text>
+      <text class="cls-7" transform="translate(37.6 979.93)"><tspan x="0" y="0">1234</tspan></text>
+      <text class="cls-7" transform="translate(37.6 1014.93)"><tspan x="0" y="0">1234</tspan></text>
+    </g>
+    <line class="cls-2" x1="832.17" x2="832.17" y2="1063.56"/>
+    <line class="cls-2" x1="101.17" y1="1" x2="101.17" y2="1029"/>
+    <line class="cls-2" x1="1004.17" y1="1" x2="1004.17" y2="1063.56"/>
+    <line class="cls-2" x1="658.17" x2="658.17" y2="1063.56"/>
+    <rect class="cls-2" x=".5" y=".5" width="1179" height="1063" rx="5" ry="5"/>
+    <g>
+      <text class="cls-6" transform="translate(131.6 63.03)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 98.03)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 133.03)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 169.03)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 204.03)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 239.03)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 274.03)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 310.03)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 345.03)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 380.03)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 415.6)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 450.6)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 485.6)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 521.6)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 556.6)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 591.6)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 626.6)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 662.6)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 697.6)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 732.6)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 767.93)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 802.93)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 838.93)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 873.93)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 908.93)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 943.93)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 979.93)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(131.6 1014.93)"><tspan x="0" y="0">会社名会社名会社名</tspan></text>
+      <text class="cls-6" transform="translate(617.6 1049.93)"><tspan x="0" y="0">合計</tspan></text>
+    </g>
+    <line class="cls-2" x1=".5" y1="40.93" x2="1179.5" y2="40.93"/>
+    <line class="cls-2" x1="1" y1="1028.5" x2="1180" y2="1028.5"/>
+    <g>
+      <text class="cls-7" transform="translate(765.99 63.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 98.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 133.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 169.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 204.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 239.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 274.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 310.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 345.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 380.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 415.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 450.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 485.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 521.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 556.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 591.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 626.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 662.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 697.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 732.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 767.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 802.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 838.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 873.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 908.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 943.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 979.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(765.99 1014.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(741.89 1049.93)"><tspan x="0" y="0">000,000,000</tspan></text>
+    </g>
+    <g>
+      <text class="cls-7" transform="translate(942.99 63.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 98.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 133.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 169.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 204.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 239.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 274.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 310.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 345.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 380.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 415.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 450.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 485.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 521.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 556.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 591.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 626.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 662.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 697.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 732.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 767.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 802.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 838.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 873.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 908.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 943.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 979.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(942.99 1014.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(918.89 1049.93)"><tspan x="0" y="0">000,000,000</tspan></text>
+    </g>
+    <g>
+      <text class="cls-7" transform="translate(1114.99 63.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 98.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 133.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 169.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 204.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 239.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 274.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 310.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 345.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 380.03)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 415.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 450.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 485.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 521.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 556.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 591.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 626.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 662.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 697.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 732.6)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 767.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 802.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 838.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 873.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 908.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 943.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 979.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1114.99 1014.93)"><tspan x="0" y="0">000,000</tspan></text>
+      <text class="cls-7" transform="translate(1090.89 1049.93)"><tspan x="0" y="0">000,000,000</tspan></text>
+    </g>
+    <text class="cls-8" transform="translate(1077 28.9)"><tspan x="0" y="0">合計</tspan></text>
+  </g>
+</svg>

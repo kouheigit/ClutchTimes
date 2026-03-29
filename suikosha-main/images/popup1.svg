@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_レイヤー_2" data-name="レイヤー 2" xmlns="http://www.w3.org/2000/svg" width="493.32" height="265.31" viewBox="0 0 493.32 265.31">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: -.29em;
+      }
+
+      .cls-2 {
+        letter-spacing: .02em;
+      }
+
+      .cls-3, .cls-4 {
+        fill: #fff;
+      }
+
+      .cls-5 {
+        fill: #b1b1b1;
+      }
+
+      .cls-6 {
+        fill: #444;
+      }
+
+      .cls-7 {
+        fill: #347cbe;
+      }
+
+      .cls-8 {
+        letter-spacing: 0em;
+      }
+
+      .cls-9 {
+        letter-spacing: .25em;
+      }
+
+      .cls-10 {
+        font-family: NotoSansCJKjp-Regular-83pv-RKSJ-H, 'Noto Sans CJK JP';
+        font-size: 14px;
+      }
+
+      .cls-10, .cls-11 {
+        fill: #666;
+      }
+
+      .cls-4 {
+        font-family: NotoSansCJKjp-Bold-83pv-RKSJ-H, 'Noto Sans CJK JP';
+        font-size: 16px;
+        font-weight: 700;
+      }
+
+      .cls-12 {
+        letter-spacing: .07em;
+      }
+
+      .cls-13 {
+        letter-spacing: .06em;
+      }
+
+      .cls-14 {
+        letter-spacing: .05em;
+      }
+
+      .cls-15 {
+        letter-spacing: .07em;
+      }
+
+      .cls-16 {
+        letter-spacing: 0em;
+      }
+
+      .cls-17 {
+        letter-spacing: .07em;
+      }
+
+      .cls-18 {
+        fill: none;
+        stroke: #ccc;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-11 {
+        font-family: NotoSansJP-Medium-83pv-RKSJ-H, 'Noto Sans JP';
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .cls-19 {
+        letter-spacing: .06em;
+      }
+
+      .cls-20 {
+        letter-spacing: .04em;
+      }
+
+      .cls-21 {
+        letter-spacing: .08em;
+      }
+
+      .cls-22 {
+        letter-spacing: .08em;
+      }
+    </style>
+  </defs>
+  <g id="popup">
+    <g>
+      <rect class="cls-3" y="45.31" width="492.5" height="220" rx="5" ry="5"/>
+      <text class="cls-11" transform="translate(149.83 95.65)"><tspan class="cls-19" x="0" y="0">20</tspan><tspan class="cls-13" x="22.6" y="0">2</tspan><tspan class="cls-14" x="33.86" y="0">1</tspan><tspan class="cls-20" x="45" y="0">年</tspan><tspan class="cls-15" x="63.71" y="0">1</tspan><tspan class="cls-22" x="75.23" y="0">2</tspan><tspan class="cls-16" x="86.88" y="0">⽉</tspan><tspan class="cls-21" x="104.77" y="0">1</tspan><tspan class="cls-2" x="116.43" y="0">3</tspan><tspan class="cls-1" x="127.13" y="0">⽇</tspan><tspan class="cls-12" x="139.93" y="0">（</tspan><tspan class="cls-8" x="159.24" y="0">⽉</tspan><tspan class="cls-17" x="177.23" y="0">）</tspan></text>
+      <text class="cls-10" transform="translate(50.9 146.96)"><tspan class="cls-9" x="0" y="0">A</tspan><tspan x="12" y="0">クライアン</tspan><tspan class="cls-9" x="82" y="0">ト-</tspan><tspan x="107.86" y="0" xml:space="preserve">現場名              </tspan></text>
+      <rect class="cls-18" x="38.79" y="127.06" width="229.5" height="29" rx="5" ry="5"/>
+      <text class="cls-10" transform="translate(317.9 146.96)"><tspan x="0" y="0">9:00</tspan></text>
+      <rect class="cls-18" x="302.79" y="127.06" width="59.71" height="29" rx="5" ry="5"/>
+      <text class="cls-10" transform="translate(407.9 146.96)"><tspan x="0" y="0">17:00</tspan></text>
+      <rect class="cls-18" x="394.79" y="127.06" width="59.71" height="29" rx="5" ry="5"/>
+      <path class="cls-6" d="m247.87,140.31h8.55l-4.27,4.4-4.27-4.4Z"/>
+      <line class="cls-18" x1="369.5" y1="141.81" x2="387.5" y2="141.81"/>
+      <rect class="cls-7" x="260" y="185.31" width="150" height="40" rx="5" ry="5"/>
+      <text class="cls-4" transform="translate(315.1 210.71)"><tspan x="0" y="0">保存</tspan></text>
+      <rect class="cls-5" x="85" y="185.31" width="150" height="40" rx="5" ry="5"/>
+      <text class="cls-4" transform="translate(140.1 210.71)"><tspan x="0" y="0">削除</tspan></text>
+      <path class="cls-3" d="m475.27,0c-9.95,0-18.05,8.1-18.05,18.05s8.1,18.05,18.05,18.05,18.05-8.1,18.05-18.05S485.22,0,475.27,0Zm7.13,23.1c.58.58.58,1.5,0,2.08-.29.29-.66.43-1.04.43s-.75-.14-1.04-.43l-5.06-5.06-5.05,5.05c-.29.29-.67.43-1.04.43s-.75-.14-1.04-.43c-.58-.58-.58-1.5,0-2.08l5.06-5.06-5.06-5.06c-.58-.58-.58-1.5,0-2.08.57-.58,1.5-.58,2.08,0l5.06,5.06,5.06-5.06c.58-.57,1.5-.57,2.08,0,.58.58.58,1.5,0,2.08l-5.06,5.06,5.05,5.06Z"/>
+    </g>
+  </g>
+</svg>

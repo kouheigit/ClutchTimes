@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="ja-JP" prefix="og: http://ogp.me/ns#">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<![endif]-->
+<meta content="telephone=no" name="format-detection">
+<meta name="viewport" content="width=device-width">
+
+<title>page｜title</title>
+<meta name="description" content="description">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="./css/style.css">
+
+</head>
+<body>
+<div id="wrapper">
+	<header id="header" class="login c_hov_wrap1">
+		<nav>
+			<div class="nav1 flex jcsb c_wrap1">
+				<h1><img src="images/logo1.svg" alt="SUIKOU"> 業務管理システム</h1>
+			</div>
+		</nav>
+	</header>
+	<div class="login_wrap">
+		<p class="attention c_attention_wrap1">
+			・入力情報に誤りがあります<br>
+			・パスワードが入力されていません
+		</p>
+		<table>
+			<tr>
+				<th>ユーザーID</th>
+				<td><input type="text" name="user_id" value="123456"></td>
+			</tr>
+			<tr>
+				<th>パスワード</th>
+				<td><input type="password" class="f_err" name="user_password"></td>
+			</tr>
+		</table>
+		<p class="submit textc mb1em"><button class="c_btn1 hov1">ログイン</button></p>
+	</div>
+	<p id="to_top"><a href="#wrapper">トップへ戻る</a></p>
+	<p id="f_copy">© 2022 水工社</p>
+</div>
+
+
+<script src="./js/jquery-3.6.0.min.js"></script>
+<script src="./js/func.js"></script>
+</body>
+</html>

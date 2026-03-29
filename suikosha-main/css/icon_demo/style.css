@@ -1,0 +1,74 @@
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?mm3fcm');
+  src:  url('../fonts/icomoon.eot?mm3fcm#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?mm3fcm') format('truetype'),
+    url('../fonts/icomoon.woff?mm3fcm') format('woff'),
+    url('../fonts/icomoon.svg?mm3fcm#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="im_"], [class*=" im_"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.im_user2:before {
+  content: "\e905";
+}
+.im_user1 .path1:before {
+  content: "\e906";
+  color: rgb(99, 99, 99);
+}
+.im_user1 .path2:before {
+  content: "\e907";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.im_user1 .path3:before {
+  content: "\e908";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.im_search:before {
+  content: "\e90b";
+  color: #fff;
+}
+.im_beginner:before {
+  content: "\e90c";
+}
+.im_dl:before {
+  content: "\e90d";
+  color: #fff;
+}
+.im_gear:before {
+  content: "\e901";
+}
+.im_login:before {
+  content: "\e902";
+}
+.im_mail:before {
+  content: "\e903";
+}
+.im_menu:before {
+  content: "\e904";
+}
+.im_school:before {
+  content: "\e909";
+}
+.im_star:before {
+  content: "\e90a";
+}

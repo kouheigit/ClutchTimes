@@ -1,0 +1,38 @@
+@charset "utf-8";
+
+@media screen and (max-width: 999px){
+    .container{
+        width: 320px;
+        -ms-grid-columns: 155px 10px 155px;
+        grid-template-columns: 155px 155px;
+        -ms-grid-rows: 116px 10px 116px 10px 116px;
+        grid-template-rows: 116px 116px 116px;
+        grid-gap:10px;
+    }
+    /*IE11用 アイテムの設定*/
+    .container .item:nth-child(1){
+        -ms-grid-row: 1;
+        -ms-grid-column: 1;
+    }
+    .container .item:nth-child(2){
+        -ms-grid-row: 1;
+        -ms-grid-column: 3;
+    }
+    .container .item:nth-child(3){
+        -ms-grid-row: 3;
+        -ms-grid-column: 1;
+    }
+    .container .item:nth-child(4){
+        -ms-grid-row: 3;
+        -ms-grid-column: 3;
+    }
+    .container .item:nth-child(5){
+        -ms-grid-row: 5;
+        -ms-grid-column: 1;
+    }
+    .container .item:nth-child(6){
+        -ms-grid-row: 5;
+        -ms-grid-column: 3;
+    }
+}
+

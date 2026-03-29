@@ -1,0 +1,373 @@
+﻿<!DOCTYPE html>
+<html lang="ja-JP" prefix="og: http://ogp.me/ns#">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<![endif]-->
+<meta content="telephone=no" name="format-detection">
+<meta name="viewport" content="width=device-width">
+
+<title>page｜title</title>
+<meta name="description" content="description">
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https:/cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+
+</head>
+<body>
+<div id="wrapper">
+	<header id="header" class=" c_hov_wrap1">
+		<nav>
+			<div class="nav1 flex jcsb c_wrap1">
+				<h1><img src="../images/logo1.svg" alt="SUIKOU"> 業務管理システム</h1>
+				<ul class="flex">
+					<li><span>アカウント：〇〇〇〇〇</span></li>
+					<li><a href="">ログアウト</a></li>
+				</ul>
+			</div>
+			<div class="nav2">
+				<ul class="flex jcc c_wrap2">
+					<li class="on"><a href="">派遣管理</a></li>
+					<li><a href="">設計管理</a></li>
+					<li><a href="">⽉報管理</a></li>
+					<li><a href="">外注⽀払管理</a></li>
+					<li><a href="">⼊⾦管理</a></li>
+					<li><a href="">請求管理</a></li>
+					<li>
+						<a href="">マスタ管理</a>
+						<ul>
+							<li><a href="">マスタ1</a></li>
+							<li><a href="">マスタ2</a></li>
+							<li><a href="">マスタ3</a></li>
+							<li><a href="">マスタ4</a></li>
+							<li><a href="">マスタ5</a></li>
+							<li><a href="">マスタ6</a></li>
+							<li><a href="">マスタ7</a></li>
+							<li><a href="">マスタ8</a></li>
+							<li><a href="">マスタ9</a></li>
+						</ul>
+					</li>
+					<li><a href="">表計算出⼒</a></li>
+					<li><a href="">PCAデータ</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<div id="contents" class="c_wrap1">
+		<div class="search_wrap c_hov_wrap1 flex jcsb detail_head">
+			<div class="input_box flex aic">
+				
+			</div>
+			<ul class="btn_warp flex jcfe mb0">
+				<li>
+					<a class="c_btn1 _pdf _icon_r _bod" href="">保存<i class="i_save"></i></a>
+				</li>
+				<li>
+					<a class="c_btn1 _pdf _icon_r" href="">PDF出⼒<i class="i_pdf"></i></a>
+				</li>
+			</ul>
+		</div>
+		<div class="table_form_wrap">
+			<h2 class="hd c_hov_wrap1">
+				<a href="">◀︎</a>
+				<span>2021年 8⽉</span>
+				<a href="">▶︎</a>
+			</h2>
+			<div class="info_wrap">
+				<p class="c_input1 _s120">担当社員</p>
+				<p class="c_input1 _s230">得意先</p>
+				<p class="c_input1 _s230">現場名</p>
+				<p class="c_input1 _icon iflex aic"><i class="i_clock"></i>就業時間：08:00〜17:00　就業時間：01:00</p>
+			</div>
+			<div class="table_input_wrap result_wrap">
+				<table>
+					<colgroup>
+						<col style="width: 140px;">
+						<col style="width: 120px;">
+						<col style="width: 120px;">
+						<col style="width: 80px;">
+						<col style="width: 80px;">
+						<col style="width: 80px;">
+						<col style="width: 42px;">
+						<col style="width: 42px;">
+						<col style="width: 42px;">
+						<col style="width: 42px;">
+						<col style="width: 200px;">
+						<col style="width: 70px;">
+					</colgroup>
+					<thead>
+						<tr>
+							<th><a><span>年⽉</span></a></th>
+							<th><a><span>出勤時間</span></a></th>
+							<th><a><span>退勤時間</span></a></th>
+							<th><a><span>休憩時間</span></a></th>
+							<th><a><span>残業時間</span></a></th>
+							<th><a><span>実績時間</span></a></th>
+							<th><a><span>遅刻</span></a></th>
+							<th><a><span>早退</span></a></th>
+							<th><a><span>残業</span></a></th>
+							<th><a><span>⽋勤</span></a></th>
+							<th><a><span>備考</span></a></th>
+							<th><a><span>削除</span></a></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="input_td"><input type="text" class="datepicker_w textc" value="2021/08/01（日）"></td>
+							<td class="input_td tardiness"><input type="text" class="timepicker textc" value="09:30"></td>
+							<td class="input_td"><input type="text" class="timepicker textc" value="17:00"></td>
+							<td class="input_td"><input type="text" class="timepicker_rest textc" value="01:00"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc" value="06:30"></td>
+							<td><label><input type="checkbox" checked></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><input type="text"></td>
+							<td class="btn btn2"><a href="" class="btn_confirm" data-confirm="削除してもよろしいでしょうか？">削除<i class="i_delete"></i></a></td>
+						</tr>
+						<tr>
+							<td class="input_td"><input type="text" class="datepicker_w textc" value="2021/08/01（日）"></td>
+							<td class="input_td"><input type="text" class="timepicker textc" value="08:50"></td>
+							<td class="overtime"><input type="text" class="timepicker textc" value="18:00"></td>
+							<td class="input_td"><input type="text" class="timepicker_rest textc" value="01:00"></td>
+							<td class="input_td"><input type="text" class="timepicker textc" value="01:00"></td>
+							<td class="input_td"><input type="text" class="timepicker textc" value="08:00"></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox" checked></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><input type="text" value="遅刻ではありません。"></td>
+							<td class="btn btn2"><a href="" class="btn_confirm" data-confirm="削除してもよろしいでしょうか？">削除<i class="i_delete"></i></a></td>
+						</tr>
+						<tr>
+							<td class="input_td"><input type="text" class="datepicker_w textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker_rest textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><input type="text"></td>
+							<td class="btn btn2"><a href="" class="btn_confirm" data-confirm="削除してもよろしいでしょうか？">削除<i class="i_delete"></i></a></td>
+						</tr>
+						<tr>
+							<td class="input_td"><input type="text" class="datepicker_w textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker_rest textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><input type="text"></td>
+							<td class="btn btn2"><a href="" class="btn_confirm" data-confirm="削除してもよろしいでしょうか？">削除<i class="i_delete"></i></a></td>
+						</tr>
+						<tr>
+							<td class="input_td"><input type="text" class="datepicker_w textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker_rest textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><input type="text"></td>
+							<td class="btn btn2"><a href="" class="btn_confirm" data-confirm="削除してもよろしいでしょうか？">削除<i class="i_delete"></i></a></td>
+						</tr>
+						<tr>
+							<td class="input_td"><input type="text" class="datepicker_w textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker_rest textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><input type="text"></td>
+							<td class="btn btn2"><a href="" class="btn_confirm" data-confirm="削除してもよろしいでしょうか？">削除<i class="i_delete"></i></a></td>
+						</tr>
+						<tr>
+							<td class="input_td"><input type="text" class="datepicker_w textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker_rest textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><input type="text"></td>
+							<td class="btn btn2"><a href="" class="btn_confirm" data-confirm="削除してもよろしいでしょうか？">削除<i class="i_delete"></i></a></td>
+						</tr>
+						<tr>
+							<td class="input_td"><input type="text" class="datepicker_w textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker_rest textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><input type="text"></td>
+							<td class="btn btn2"><a href="" class="btn_confirm" data-confirm="削除してもよろしいでしょうか？">削除<i class="i_delete"></i></a></td>
+						</tr>
+						<tr>
+							<td class="input_td"><input type="text" class="datepicker_w textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker_rest textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><input type="text"></td>
+							<td class="btn btn2"><a href="" class="btn_confirm" data-confirm="削除してもよろしいでしょうか？">削除<i class="i_delete"></i></a></td>
+						</tr>
+						<tr>
+							<td class="input_td"><input type="text" class="datepicker_w textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker_rest textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><input type="text"></td>
+							<td class="btn btn2"><a href="" class="btn_confirm" data-confirm="削除してもよろしいでしょうか？">削除<i class="i_delete"></i></a></td>
+						</tr>
+						<tr>
+							<td class="input_td"><input type="text" class="datepicker_w textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker_rest textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><input type="text"></td>
+							<td class="btn btn2"><a href="" class="btn_confirm" data-confirm="削除してもよろしいでしょうか？">削除<i class="i_delete"></i></a></td>
+						</tr>
+						<tr>
+							<td class="input_td"><input type="text" class="datepicker_w textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker_rest textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><input type="text"></td>
+							<td class="btn btn2"><a href="" class="btn_confirm" data-confirm="削除してもよろしいでしょうか？">削除<i class="i_delete"></i></a></td>
+						</tr>
+						<tr>
+							<td class="input_td"><input type="text" class="datepicker_w textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker_rest textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><input type="text"></td>
+							<td class="btn btn2"><a href="" class="btn_confirm" data-confirm="削除してもよろしいでしょうか？">削除<i class="i_delete"></i></a></td>
+						</tr>
+						<tr>
+							<td class="input_td"><input type="text" class="datepicker_w textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker_rest textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><input type="text"></td>
+							<td class="btn btn2"><a href="" class="btn_confirm" data-confirm="削除してもよろしいでしょうか？">削除<i class="i_delete"></i></a></td>
+						</tr>
+						<tr>
+							<td class="input_td"><input type="text" class="datepicker_w textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker_rest textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><input type="text"></td>
+							<td class="btn btn2"><a href="" class="btn_confirm" data-confirm="削除してもよろしいでしょうか？">削除<i class="i_delete"></i></a></td>
+						</tr>
+						<tr>
+							<td class="input_td"><input type="text" class="datepicker_w textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker_rest textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td class="input_td"><input type="text" class="timepicker textc"></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><label><input type="checkbox"></label></td>
+							<td><input type="text"></td>
+							<td class="btn btn2"><a href="" class="btn_confirm" data-confirm="削除してもよろしいでしょうか？">削除<i class="i_delete"></i></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="other_wrap flex jcfe c_hov_wrap1">
+				<div class="box">
+					<h3 class="hd">交通費</h3>
+					<div class="inner">
+						<a href="" class="link">
+							<span>〇〇駅〜△□駅（12/1〜12/31）</span>
+							<span>7,550円</span>
+						</a>
+						<a href="" class="link">
+							<span>〇〇駅〜△□駅（12/1〜12/31）</span>
+							<span>7,550円</span>
+						</a>
+						<p class="btn"><a href="" class="c_btn1 _bg_dgray _small"><span>追加</span><i class="i_plus _bold"></i></a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<p id="to_top"><a class="c_hov1" href="#wrapper">トップへ戻る</a></p>
+	<p id="f_copy">Copyright © Eiken Foundation of Japan All rights reserved.</p>
+</div>
+
+
+<script src="../js/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<script src="../js/func.js"></script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+﻿@use 'setting' as s;
+
+#ui-datepicker-div {
+	margin-top: 5px;
+}
+#contents {
+	position: relative;
+}
+.attention {
+	color: s.$c_red1;
+}
+
+.bg_white {
+	background: #fff;
+}
+.bg_red {
+	background: s.$c_red1 !important;
+}
+.bg_red_op {
+	background: s.$c_red2 !important;
+}
+
+.textc {
+	text-align: center;
+}
+.textr {
+	text-align: right;
+}
+.textu {
+	text-decoration: underline;
+}
+a.textu:hover {
+	text-decoration: none;
+}
+.flex {
+	display: flex !important;
+}
+.iflex {
+	display: inline-flex !important;
+}
+.fww {
+	flex-wrap: wrap !important;
+}
+.aic {
+	align-items: center !important;
+}
+.jcc {
+	justify-content: center !important;
+}
+.jcsa {
+	justify-content: space-around !important;
+}
+.jcfe {
+	justify-content: flex-end !important;
+}
+.jcsb {
+	justify-content: space-between !important;
+}
+
+.mb0 {
+	margin-bottom: 0 !important;
+}
+
+.mb1em {
+	margin-bottom: 1em !important;
+}
+
+.mb50 {
+	margin-bottom: 50px !important;
+}
+
+
+#wrapper {
+	position: relative;
+	min-height: 100vh;
+	padding: 0 0 80px;
+}
+
+.c_wrap1 {
+	width: 1280px;
+	padding: 0 50px;
+	margin: 0 auto;
+	@media screen and (min-width: 1250px) {
+		padding: 0 100px;
+	}
+}
+.c_wrap2 {
+	min-width: 1200px;
+	max-width: 1450px;
+	margin: 0 auto;
+}
+.c_hov_wrap1 {
+	a,
+	button {
+		transition: 0.3s;
+		&:hover {
+			opacity: 0.6;
+		}
+	}
+}
+
+.hov1 {
+	transition: 0.3s;
+	&:hover {
+		opacity: 0.6;
+	}
+}
+
+
+
+
+
+.i_arrow_r {
+	width: 14px;
+	height: 14px;
+	background: url("../images/i_arrow_r.png") no-repeat 0 / 100%;
+}
+
+.i_clock {
+	width: 15px;
+	height: 15px;
+	background: url("../images/i_clock.png") no-repeat 0 / 100%;
+}
+
+.i_cross {
+	width: 14px;
+	height: 14px;
+	background: url("../images/i_cross.png") no-repeat 0 / 100%;
+}
+
+.i_delete {
+	width: 9px;
+	height: 10px;
+	background: url("../images/i_delete.png") no-repeat 0 / 100%;
+}
+
+.i_pen {
+	width: 15px;
+	height: 15px;
+	background: url("../images/i_pen.png") no-repeat 0 / 100%;
+}
+
+.i_pdf {
+	width: 15px;
+	height: 18px;
+	background: url("../images/i_pdf.png") no-repeat 0 / 100%;
+}
+
+.i_setting {
+	width: 16px;
+	height: 16px;
+	background: url("../images/i_setting.png") no-repeat 0 / 100%;
+}
+
+.i_plus {
+	position: relative;
+	width: 14px;
+	height: 14px;
+	&::before,
+	&::after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 100%;
+		height: 2px;
+		background: #fff;
+		transform: translate(-50%,-50%);
+	}
+	&::after {
+		transform: translate(-50%,-50%) rotate(90deg);
+	}
+	&._bold {
+		&::before,
+		&::after {
+			height: 3px;
+		}
+	}
+}
+
+.i_restore {
+	width: 14px;
+	height: 14px;
+	background: url("../images/i_restore.png") no-repeat 0 / 100%;
+}
+
+.i_save {
+	width: 17px;
+	height: 14px;
+	background: url("../images/i_save.png") no-repeat 0 / 100%;
+}
+
+.i_search {
+	width: 15px;
+	height: 15px;
+	background: url("../images/i_search.png") no-repeat 0 / 100%;
+}
+
+.i_triangle_l {
+	width: 10px;
+	height: 13px;
+	background: url("../images/i_triangle_l.png") no-repeat 0 / 100%;
+}
+
+.i_update {
+	width: 15px;
+	height: 15px;
+	background: url("../images/i_update.png") no-repeat 0 / 100%;
+}

@@ -1,0 +1,35 @@
+@charset "utf-8";
+
+/*全体の設定・事前準備*/
+*{
+    box-sizing:border-box;
+    margin: 0;
+    padding: 0;
+}
+ul{list-style: none;}
+img{
+    display: block;
+    max-width: 100%;
+}
+.container{
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+}
+
+/*Gridの設定*/
+.container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap:20px;
+}
+
+
+@media screen and (max-width: 650px){
+    .container{
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-gap:10px;
+    }
+}

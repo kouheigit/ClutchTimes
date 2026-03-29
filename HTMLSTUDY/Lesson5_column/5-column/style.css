@@ -1,0 +1,11 @@
+@charset "utf-8";
+
+*{color: black;}
+p{color: brown;}
+p.red{color: red;}
+p#blue{color: blue;}
+div p{color: yellow;}
+div p.red{color: orange;}
+
+div#pink p{color: pink;}
+p{color: green !important;}

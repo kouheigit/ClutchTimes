@@ -1,0 +1,269 @@
+﻿@charset 'UTF-8';
+@use 'setting' as s;
+
+html {
+	font-size: 10px;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	color: inherit;
+	font-weight: inherit;
+	&:before,
+	&:after {
+		box-sizing: border-box;
+	}
+}
+
+/*
+input[type=text],
+input[type=number],
+input[type=password],
+input[type=tel] {
+	-webkit-appearance: none;
+}
+*/
+
+header,footer,nav,main,article,section,figure,aside {
+	display: block;
+}
+
+body {
+	line-height: 1.7;
+	background: #fff;
+	color: #666666;
+	font-family: 'Noto Sans JP','ヒラギノ角ゴシック','Hiragino Sans','ヒラギノ角ゴ Pro','Hiragino Kaku Gothic Pro','游ゴシック',YuGothic,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
+	font-weight: 400;
+	font-size: 1.6rem;
+	text-align: center;
+	-webkit-text-size-adjust: 100%;
+}
+
+
+::-webkit-input-placeholder {
+	font-family: 'Noto Sans JP','ヒラギノ角ゴシック','Hiragino Sans','ヒラギノ角ゴ Pro','Hiragino Kaku Gothic Pro','游ゴシック',YuGothic,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
+}
+:-moz-placeholder {
+	font-family: 'Noto Sans JP','ヒラギノ角ゴシック','Hiragino Sans','ヒラギノ角ゴ Pro','Hiragino Kaku Gothic Pro','游ゴシック',YuGothic,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
+}
+::-moz-placeholder {
+	font-family: 'Noto Sans JP','ヒラギノ角ゴシック','Hiragino Sans','ヒラギノ角ゴ Pro','Hiragino Kaku Gothic Pro','游ゴシック',YuGothic,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
+}
+:-ms-input-placeholder {
+	font-family: 'Noto Sans JP','ヒラギノ角ゴシック','Hiragino Sans','ヒラギノ角ゴ Pro','Hiragino Kaku Gothic Pro','游ゴシック',YuGothic,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
+}
+::placeholder {
+	font-family: 'Noto Sans JP','ヒラギノ角ゴシック','Hiragino Sans','ヒラギノ角ゴ Pro','Hiragino Kaku Gothic Pro','游ゴシック',YuGothic,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
+}
+
+/*
+@media all and (-ms-high-contrast:none) {
+	body {
+		font-family: 'メイリオ',Meiryo,'游ゴシック',YuGothic,'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','ＭＳ Ｐゴシック','MS PGothic',sans-serif;
+	}
+}
+*/
+
+h1,h2,h3,h4,h5,h6,pre,code,address,caption,code,th,td,select,p,li,i {
+	font-size: inherit;
+	font-weight: inherit;
+	font-style: normal;
+}
+
+em,strong {
+	font-size: inherit;
+}
+
+strong,b {
+	font-weight: 600;
+}
+
+h1,h2,h3,h4,h5,h6,p,li,dt,dd,th,td {
+	line-height: 1.7;
+	text-align: left;
+}
+
+/* base style
+------------------------------------------------------------------------- */
+	
+li {
+	list-style: none;
+}
+
+fieldset,img,hr {
+	border: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-style: none;
+}
+
+th {
+	vertical-align: top;
+	br {
+		display: block;
+		width: 0 !important;
+		height: 0 !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		overflow: hidden !important;
+	}
+}
+
+td {
+	vertical-align: top;
+	word-break: break-all;
+}
+
+a {
+	border: none;
+	color: inherit;
+	text-decoration: none;
+}
+
+input[type=text],
+input[type=date],
+input[type=time],
+input[type=number],
+input[type=password],
+input[type=tel],
+textarea,
+select {
+	box-shadow: none;
+	color: #666666;
+	font-family: 'Noto Sans JP','ヒラギノ角ゴシック','Hiragino Sans','ヒラギノ角ゴ Pro','Hiragino Kaku Gothic Pro','游ゴシック',YuGothic,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
+}
+
+textarea {
+	height: 100px;
+	line-height: 1.7;
+	resize: vertical;
+}
+
+select {
+	font-size: 1.4rem;
+}
+
+label,
+input[type=checkbox],
+input[type=radio],
+input[type=button],
+input[type=submit],
+button {
+	font-family: 'Noto Sans JP','ヒラギノ角ゴシック','Hiragino Sans','ヒラギノ角ゴ Pro','Hiragino Kaku Gothic Pro','游ゴシック',YuGothic,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
+	cursor: pointer;
+}
+
+button {
+	display: block;
+	border: none;
+	background: none;
+	outline: none;
+	color: inherit;
+	font-size: 1.4rem;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	vertical-align: bottom;
+}
+
+@font-face {
+	font-family: 'icomoon';
+	src:
+		url('fonts/icomoon.ttf?nzco1u') format('truetype'),
+		url('fonts/icomoon.woff?nzco1u') format('woff'),
+		url('fonts/icomoon.svg?nzco1u#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+
+i {
+	/* use !important to prevent issues with browser extensions that change fonts */
+	font-family: 'icomoon' !important;
+	speak: never;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.im_trash:before {
+	content: "\e912";
+}
+.im_turn:before {
+	content: "\e911";
+	color: #fff;
+}
+.im_check:before {
+	content: "\e900";
+	color: #fff;
+}
+.im_pen:before {
+	content: "\e901";
+	color: #fff;
+}
+.im_tel:before {
+	content: "\e90e";
+	color: #e60012;
+}
+.im_up:before {
+	content: "\e903";
+	color: #fff;
+}
+.im_user2:before {
+	content: "\e905";
+}
+.im_user1 .path1:before {
+	content: "\e906";
+	color: rgb(99, 99, 99);
+}
+.im_user1 .path2:before {
+	content: "\e907";
+	margin-left: -1.28125em;
+	color: rgb(255, 255, 255);
+}
+.im_user1 .path3:before {
+	content: "\e908";
+	margin-left: -1.28125em;
+	color: rgb(255, 255, 255);
+}
+.im_search:before {
+	content: "\e90b";
+	color: #fff;
+}
+.im_beginner:before {
+	content: "\e90c";
+}
+.im_dl:before {
+	content: "\e90d";
+	color: #fff;
+}
+.im_gear:before {
+	content: "\e902";
+}
+.im_login:before {
+	content: "\e904";
+}
+.im_mail:before {
+	content: "\e909";
+}
+.im_menu:before {
+	content: "\e90a";
+}
+.im_school:before {
+	content: "\e910";
+}
+.im_star:before {
+	content: "\e90f";
+}

@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+/*Gridの設定*/
+.container{
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 320px 20px 320px 20px 320px;
+    grid-template-columns: 320px 320px 320px;
+    -ms-grid-rows:240px 20px 240px;
+    grid-template-rows: 240px 240px;
+    grid-gap:20px;
+}
+/*IE11用 アイテムの設定*/
+.container .item:nth-child(1){
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+}
+.container .item:nth-child(2){
+    -ms-grid-row: 1;
+    -ms-grid-column: 3;
+}
+.container .item:nth-child(3){
+    -ms-grid-row: 1;
+    -ms-grid-column: 5;
+}
+.container .item:nth-child(4){
+    -ms-grid-row: 3;
+    -ms-grid-column: 1;
+}
+.container .item:nth-child(5){
+    -ms-grid-row: 3;
+    -ms-grid-column: 3;
+}
+.container .item:nth-child(6){
+    -ms-grid-row: 3;
+    -ms-grid-column: 5;
+}

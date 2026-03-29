@@ -1,0 +1,16 @@
+﻿<Properties StartupConfiguration="{16EB93F7-CE20-D290-4F2B-0758B19E07CB}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/PlayerController.cs">
+    <Files>
+      <File FileName="Assets/PlayerController.cs" Line="58" Column="10" />
+      <File FileName="Assets/CameraController.cs" Line="20" Column="1" />
+      <File FileName="Assets/ClearDirector.cs" Line="12" Column="49" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="7d8c79d1-7f14-45aa-b2c0-0c51fcb98088" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

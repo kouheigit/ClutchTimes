@@ -1,0 +1,11 @@
+@charset "utf-8";
+
+@media screen and (max-width: 999px){
+    .container{
+        width: 320px;
+        grid-template-columns: 155px 155px;
+        grid-template-rows: 116px 116px 116px;
+        grid-gap:10px;
+    }
+}
+

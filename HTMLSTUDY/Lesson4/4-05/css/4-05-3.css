@@ -1,0 +1,18 @@
+@charset "utf-8";
+
+
+/*下層リストの表示/非表示の設定*/
+ul.sub-list {
+    position: absolute;
+    top:100%;
+    left: 0;
+    display: none;
+}
+
+ul.sub-list li {
+    width: 100%;
+}
+
+ul.gnav-list li:hover>ul.sub-list{
+    display: block;
+}

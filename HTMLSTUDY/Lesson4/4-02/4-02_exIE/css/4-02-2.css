@@ -1,0 +1,9 @@
+@charset "utf-8";
+
+/*Gridの設定*/
+.container{
+    display: grid;
+    grid-template-columns: 320px 320px 320px;
+    grid-template-rows: 240px 240px;
+    grid-gap:20px;
+}
