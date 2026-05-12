@@ -1,0 +1,247 @@
+project:
+  name: transport_jobs
+  title: 運送業界向け求人マッチングシステム
+  framework: Ruby on Rails 7.1
+  language: Ruby 3.2
+  database: MySQL 8.0
+  frontend: ERB + jQuery + Bootstrap
+  authentication: Devise
+  authorization: Pundit
+  background_jobs: Sidekiq + Redis
+  testing: RSpec + FactoryBot
+  scope: 実装のみ
+  estimate: 3〜5日
+
+assumptions:
+  - 既存仕様に沿って実装する
+  - 仕様追加は別途調整する
+  - 本番環境構築は対象外とする
+  - 外部APIの実接続検証は別途調整する
+
+implementation_order:
+  - DB・モデル・認証まわり
+  - 求職者向け機能
+  - 企業向け機能
+  - 管理画面・API・非同期処理
+  - テスト・バグ修正・納品確認
+
+schedule:
+  day_1:
+    title: DB・モデル・認証まわり
+    goal: システムの土台を確認・実装する
+    files:
+      - Gemfile
+      - config/database.yml
+      - config/routes.rb
+      - db/migrate/20240101000001_devise_create_users.rb
+      - db/migrate/20240101000002_devise_create_companies.rb
+      - db/migrate/20240101000003_devise_create_admins.rb
+      - db/migrate/20240101000004_create_areas.rb
+      - db/migrate/20240101000005_create_license_types.rb
+      - db/migrate/20240101000006_create_jobs.rb
+      - db/migrate/20240101000007_create_applications.rb
+      - db/migrate/20240101000008_create_join_tables.rb
+      - db/seeds.rb
+      - app/models/user.rb
+      - app/models/company.rb
+      - app/models/admin.rb
+      - app/models/job.rb
+      - app/models/application.rb
+      - app/models/area.rb
+      - app/models/license_type.rb
+    steps:
+      - bundle install を実行する
+      - rails db:create db:migrate db:seed を実行する
+      - User、Company、Admin のDeviseログインを確認する
+      - Job、Application、Area、LicenseType の関連付けを確認する
+      - バリデーション、enum、scopeを実装・修正する
+      - seedで求人・地域・免許データを作成する
+    checks:
+      - 求人検索、応募、企業管理に必要なデータ構造が成立している
+      - users、companies、admins の認証が分離されている
+      - jobs と applications の関連が正しい
+
+  day_2:
+    title: 求職者向け機能
+    goal: 求人検索、求人詳細、応募、応募履歴を実装する
+    files:
+      - app/controllers/jobs_controller.rb
+      - app/controllers/applications_controller.rb
+      - app/views/jobs/index.html.erb
+      - app/views/jobs/show.html.erb
+      - app/views/jobs/_job_card.html.erb
+      - app/views/applications/new.html.erb
+      - app/views/applications/index.html.erb
+      - app/views/applications/show.html.erb
+      - app/policies/job_policy.rb
+      - app/policies/application_policy.rb
+    steps:
+      - JobsController#index で求人検索を実装する
+      - area_id、employment_type、license_type_ids、keyword、salary_min を検索条件にする
+      - Job.search のscope連携を確認する
+      - jobs/index.html.erb に検索フォームと求人一覧を実装する
+      - jobs/_job_card.html.erb で求人カード表示を整える
+      - jobs/show.html.erb に求人詳細と応募ボタンを実装する
+      - ApplicationsController#new と ApplicationsController#create で応募処理を実装する
+      - current_user.applied_to? で重複応募を防止する
+      - ApplicationsController#index と ApplicationsController#show で応募履歴を実装する
+      - withdraw アクションで応募取り下げを実装する
+      - Punditで本人以外の応募閲覧を防止する
+    checks:
+      - 未ログインユーザーは応募できない
+      - 同じ求人に重複応募できない
+      - 応募履歴は本人のものだけ表示される
+      - 取り下げ可能な応募だけ取り下げできる
+
+  day_3:
+    title: 企業向け機能
+    goal: 企業が求人を作成・編集し、応募者を確認できるようにする
+    files:
+      - app/controllers/company/base_controller.rb
+      - app/controllers/company/jobs_controller.rb
+      - app/controllers/company/applications_controller.rb
+      - app/views/layouts/company.html.erb
+      - app/views/company/jobs/index.html.erb
+      - app/views/company/jobs/new.html.erb
+      - app/views/company/jobs/edit.html.erb
+      - app/views/company/jobs/_form.html.erb
+      - app/views/company/applications/index.html.erb
+      - app/views/company/applications/show.html.erb
+      - app/policies/job_policy.rb
+      - app/policies/application_policy.rb
+    steps:
+      - Company::BaseController で authenticate_company! を設定する
+      - Company::JobsController#index で自社求人のみ表示する
+      - new、create、edit、update、destroy を実装する
+      - company/jobs/_form.html.erb に求人入力項目を実装する
+      - JobPolicy で他社求人を編集できないようにする
+      - Company::ApplicationsController#index で自社求人への応募一覧を表示する
+      - Company::ApplicationsController#show で応募詳細を表示する
+      - Company::ApplicationsController#update で応募ステータス変更を実装する
+      - ステータス変更時の通知ワーカー呼び出しを確認する
+    form_fields:
+      - title
+      - description
+      - employment_type
+      - salary_type
+      - salary_min
+      - salary_max
+      - area_id
+      - status
+      - published_at
+      - expires_at
+      - license_type_ids
+    checks:
+      - 企業は自社求人だけ閲覧・編集・削除できる
+      - 他社求人にアクセスできない
+      - 自社求人への応募だけ確認できる
+      - 応募ステータス変更が保存される
+
+  day_4:
+    title: 管理画面・API・非同期処理
+    goal: 管理者機能、API、Sidekiq処理を仕上げる
+    files:
+      - app/controllers/admin/base_controller.rb
+      - app/controllers/admin/dashboard_controller.rb
+      - app/controllers/admin/jobs_controller.rb
+      - app/views/layouts/admin.html.erb
+      - app/views/admin/dashboard/index.html.erb
+      - app/views/admin/jobs/index.html.erb
+      - app/policies/admin_job_policy.rb
+      - app/controllers/api/v1/base_controller.rb
+      - app/controllers/api/v1/jobs_controller.rb
+      - app/controllers/api/v1/applications_controller.rb
+      - app/services/external_job_api_client.rb
+      - app/workers/expire_jobs_worker.rb
+      - app/workers/sync_external_jobs_worker.rb
+      - app/workers/application_notification_worker.rb
+      - app/workers/status_change_notification_worker.rb
+      - config/sidekiq.yml
+      - config/initializers/sidekiq.rb
+    steps:
+      - Admin::BaseController で authenticate_admin! を設定する
+      - 管理ダッシュボードに求人数・応募数などを表示する
+      - Admin::JobsController で求人一覧・詳細・編集・削除を実装する
+      - AdminJobPolicy で管理者権限を整理する
+      - Api::V1::JobsController の一覧・詳細・作成・更新・削除を確認する
+      - Api::V1::ApplicationsController の応募作成・一覧・取り下げを確認する
+      - APIのJSONレスポンスを整える
+      - ExpireJobsWorker で期限切れ求人を closed に変更する
+      - SyncExternalJobsWorker で外部求人API同期処理を確認する
+      - 応募作成・ステータス変更時のメール通知ワーカーを確認する
+      - /sidekiq の管理者アクセス制限を確認する
+    checks:
+      - 管理者だけ管理画面にアクセスできる
+      - 管理者だけ /sidekiq にアクセスできる
+      - APIの認証が必要な操作で正しく制限される
+      - 期限切れ求人が自動で非公開化される
+      - 外部API同期は失敗時にログと例外処理がある
+
+  day_5:
+    title: テスト・バグ修正・納品確認
+    goal: RSpecと主要動作を確認し、提出可能な状態に整える
+    files:
+      - spec/models/job_spec.rb
+      - spec/models/application_spec.rb
+      - spec/models/user_spec.rb
+      - spec/controllers/company/jobs_controller_spec.rb
+      - spec/controllers/api/v1/jobs_controller_spec.rb
+      - spec/policies/job_policy_spec.rb
+      - spec/workers/expire_jobs_worker_spec.rb
+      - spec/workers/sync_external_jobs_worker_spec.rb
+      - spec/services/external_job_api_client_spec.rb
+      - spec/factories/users.rb
+      - spec/factories/companies.rb
+      - spec/factories/jobs.rb
+      - spec/factories/applications.rb
+      - spec/factories/areas.rb
+      - spec/factories/license_types.rb
+    steps:
+      - bundle exec rspec を実行する
+      - モデルテストの失敗を修正する
+      - Controllerテストの認証・権限まわりを修正する
+      - FactoryBotの不足データを修正する
+      - Sidekiqワーカーのテストを確認する
+      - 外部API通信をWebMockでモック化する
+      - 求人検索から応募取り下げまでの求職者導線を確認する
+      - 企業ログインから応募ステータス変更までの企業導線を確認する
+      - 管理者ログインから求人管理とSidekiq画面まで確認する
+      - READMEの起動手順どおり動くか確認する
+    checks:
+      - bundle exec rspec が通る
+      - 主要な画面遷移でエラーが出ない
+      - 認証・認可の境界が破綻していない
+      - seed投入後に確認しやすい初期データがある
+
+short_schedule_3_days:
+  day_1:
+    - DB・モデル・認証
+    - 求人一覧・詳細
+    - 求人検索
+  day_2:
+    - 応募機能
+    - 応募履歴
+    - 応募取り下げ
+    - 企業側の求人CRUD
+  day_3:
+    - 企業側の応募管理
+    - 管理画面の最低限
+    - APIの主要部分
+    - RSpecの主要失敗修正
+    - 主要導線の動作確認
+
+deferred_in_3_days:
+  - 管理画面の細かいUI調整
+  - APIレスポンスの細かい整形
+  - 外部API実接続検証
+  - Sidekiqスケジュールの本番運用確認
+  - メール文面の細かい調整
+  - テストカバレッジの拡充
+
+client_message:
+  summary: 実装のみの担当で、既存仕様に沿って進める前提であれば、3〜5日程度で対応可能です。
+  details:
+    - 実装は、DB・モデル、求職者機能、企業機能、管理画面/API/Sidekiq、テスト修正の順で進めます。
+    - 主な対象ファイルは app/models、app/controllers、app/views、app/policies、app/workers、app/services、spec 配下です。
+    - 3日対応の場合は主要機能優先、5日対応の場合はRSpec修正と主要動作確認まで含めて進めます。
+    - 仕様追加、本番環境構築、外部APIの実接続検証は別途調整が必要です。

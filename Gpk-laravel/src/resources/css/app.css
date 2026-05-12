@@ -1,0 +1,66 @@
+/* GLAMDAY STYLE デザイン - フォントインポート */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --glamday-black: #000000;
+    --glamday-white: #ffffff;
+    --glamday-gray-dark: #1a1a1a;
+    --glamday-gray-light: #f5f5f5;
+}
+
+/* GLAMDAY STYLE ヘッダー */
+.glamday-header {
+    background-color: var(--glamday-gray-dark);
+    color: var(--glamday-white);
+    padding: 1rem 2rem;
+}
+
+.glamday-logo {
+    font-family: 'Times New Roman', serif;
+    font-size: 3rem;
+    font-weight: bold;
+    letter-spacing: -2px;
+    color: var(--glamday-white);
+}
+
+.glamday-brand {
+    font-family: 'Times New Roman', serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--glamday-white);
+}
+
+.glamday-official {
+    font-family: 'Times New Roman', serif;
+    font-size: 0.875rem;
+    font-style: italic;
+    color: var(--glamday-white);
+    margin-top: 0.25rem;
+}
+
+.glamday-japanese {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.75rem;
+    color: var(--glamday-white);
+    margin-top: 0.25rem;
+}
+
+/* GLAMDAY STYLE 見出し */
+.glamday-heading {
+    font-family: 'Times New Roman', serif;
+    color: var(--glamday-black);
+    font-weight: bold;
+}
+
+/* GLAMDAY STYLE 本文 */
+.glamday-body {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--glamday-black);
+}

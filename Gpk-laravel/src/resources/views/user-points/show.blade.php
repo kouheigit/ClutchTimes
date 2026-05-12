@@ -1,0 +1,52 @@
+<x-app-layout>
+    <x-slot name="header">
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                ユーザーポイント詳細
+            </h2>
+            <a href="{{ route('user-points.index') }}" 
+               class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 text-sm">
+                一覧に戻る
+            </a>
+        </div>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6">
+                    <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <dt class="text-sm font-medium text-gray-500">ポイント数</dt>
+                            <dd class="mt-1 text-lg font-semibold text-gray-900">
+                                {{ number_format($userPoint->point) }}ポイント
+                            </dd>
+                        </div>
+                        
+                        <div>
+                            <dt class="text-sm font-medium text-gray-500">有効期限</dt>
+                            <dd class="mt-1 text-sm text-gray-900">
+                                {{ \Carbon\Carbon::parse($userPoint->to)->format('Y年m月d日') }}
+                            </dd>
+                        </div>
+                        
+                        <div>
+                            <dt class="text-sm font-medium text-gray-500">作成日時</dt>
+                            <dd class="mt-1 text-sm text-gray-900">
+                                {{ $userPoint->created_at->format('Y年m月d日 H:i') }}
+                            </dd>
+                        </div>
+                        
+                        <div>
+                            <dt class="text-sm font-medium text-gray-500">更新日時</dt>
+                            <dd class="mt-1 text-sm text-gray-900">
+                                {{ $userPoint->updated_at->format('Y年m月d日 H:i') }}
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
+
