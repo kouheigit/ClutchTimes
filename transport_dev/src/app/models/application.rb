@@ -1,8 +1,18 @@
 class Application < ApplicationRecord
   belongs_to :user
   belongs_to :job
-  enum :status, [ pending:0, reviewing:1, accepted:2, rejected:3 withdrawn:4 ]
+  validates :status, presence: true
 
+
+  enum :status, { pending:0, reviewing:1, accepted:2, rejected:3,withdrawn:4 }
+
+  scope :active, -> { where.not(status: :withdrawn) } 
+
+  def withdrawable?
+    pending? || reviewing?
+  end
+
+  
 end
 
 
