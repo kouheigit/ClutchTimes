@@ -1751,3 +1751,689 @@ FOREIGN KEY (`company_id`)
   [1m[36mUser Create (1.3ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('求職者サンプル', 'user7@example.com', '$2a$12$5zk.E/o7ZtRQYTIijtE1vuSz0Nqok8El5trCLRdwJaSQqt1/i85.O', NULL, NULL, NULL, '2026-05-12 12:58:14.488969', '2026-05-12 12:58:14.488969')[0m
   [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
   [1m[36mTRANSACTION (4.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (6.7ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[35m (130.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS `transport_jobs_test`[0m
+  [1m[35m (7.2ms)[0m  [1m[35mCREATE DATABASE `transport_jobs_test` DEFAULT CHARACTER SET `utf8mb4`[0m
+  [1m[35m (5.0ms)[0m  [1m[35mDROP TABLE IF EXISTS `admins` CASCADE[0m
+  [1m[35m (43.3ms)[0m  [1m[35mCREATE TABLE `admins` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) DEFAULT '' NOT NULL, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime(6), `remember_created_at` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, UNIQUE INDEX `index_admins_on_email` (`email`), UNIQUE INDEX `index_admins_on_reset_password_token` (`reset_password_token`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (4.2ms)[0m  [1m[35mDROP TABLE IF EXISTS `applications` CASCADE[0m
+  [1m[35m (39.9ms)[0m  [1m[35mCREATE TABLE `applications` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user_id` bigint NOT NULL, `job_id` bigint NOT NULL, `status` int, `message` text, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_applications_on_job_id` (`job_id`), INDEX `index_applications_on_user_id` (`user_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (2.7ms)[0m  [1m[35mDROP TABLE IF EXISTS `areas` CASCADE[0m
+  [1m[35m (45.6ms)[0m  [1m[35mCREATE TABLE `areas` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `pref_code` int, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (3.5ms)[0m  [1m[35mDROP TABLE IF EXISTS `companies` CASCADE[0m
+  [1m[35m (53.4ms)[0m  [1m[35mCREATE TABLE `companies` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) DEFAULT '' NOT NULL, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime(6), `remember_created_at` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, UNIQUE INDEX `index_companies_on_email` (`email`), UNIQUE INDEX `index_companies_on_reset_password_token` (`reset_password_token`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (7.1ms)[0m  [1m[35mDROP TABLE IF EXISTS `jobs` CASCADE[0m
+  [1m[35m (37.3ms)[0m  [1m[35mCREATE TABLE `jobs` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `company_id` bigint NOT NULL, `title` varchar(255), `description` text, `employment_type` int, `salary_type` int, `salary_min` int, `salary_max` int, `area_id` bigint NOT NULL, `status` int, `published_at` datetime(6), `expires_at` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_jobs_on_area_id` (`area_id`), INDEX `index_jobs_on_company_id` (`company_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (2.8ms)[0m  [1m[35mDROP TABLE IF EXISTS `jobs_license_types` CASCADE[0m
+  [1m[35m (27.5ms)[0m  [1m[35mCREATE TABLE `jobs_license_types` (`job_id` bigint NOT NULL, `license_type_id` bigint NOT NULL, UNIQUE INDEX `index_jobs_license_types_on_job_id_and_license_type_id` (`job_id`, `license_type_id`), INDEX `index_jobs_license_types_on_license_type_id_and_job_id` (`license_type_id`, `job_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (2.2ms)[0m  [1m[35mDROP TABLE IF EXISTS `license_types` CASCADE[0m
+  [1m[35m (25.5ms)[0m  [1m[35mCREATE TABLE `license_types` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `code` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (2.6ms)[0m  [1m[35mDROP TABLE IF EXISTS `users` CASCADE[0m
+  [1m[35m (33.7ms)[0m  [1m[35mCREATE TABLE `users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) DEFAULT '' NOT NULL, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime(6), `remember_created_at` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, UNIQUE INDEX `index_users_on_email` (`email`), UNIQUE INDEX `index_users_on_reset_password_token` (`reset_password_token`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (104.2ms)[0m  [1m[35mALTER TABLE `applications` ADD CONSTRAINT `fk_rails_7a1f279622`
+FOREIGN KEY (`job_id`)
+  REFERENCES `jobs` (`id`)
+[0m
+  [1m[35m (83.0ms)[0m  [1m[35mALTER TABLE `applications` ADD CONSTRAINT `fk_rails_703c720730`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (75.0ms)[0m  [1m[35mALTER TABLE `jobs` ADD CONSTRAINT `fk_rails_3692b6b78b`
+FOREIGN KEY (`area_id`)
+  REFERENCES `areas` (`id`)
+[0m
+  [1m[35m (79.4ms)[0m  [1m[35mALTER TABLE `jobs` ADD CONSTRAINT `fk_rails_b34da78090`
+FOREIGN KEY (`company_id`)
+  REFERENCES `companies` (`id`)
+[0m
+  [1m[35m (34.8ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (8.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (20260512000000)[0m
+  [1m[35m (6.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES
+(20260510153253),
+(20260510152755),
+(20260510152300),
+(20260510152253),
+(20260510151844),
+(20260510151255),
+(20260510151250),
+(20260510150755);[0m
+  [1m[35m (29.8ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.9ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Create (4.1ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2026-05-16 11:43:56.886728', '2026-05-16 11:43:56.886733')[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Update (4.9ms)[0m  [1m[33mUPDATE `ar_internal_metadata` SET `ar_internal_metadata`.`value` = 'test', `ar_internal_metadata`.`updated_at` = '2026-05-16 11:43:56.900130' WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Create (4.2ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('schema_sha1', '3233af2f1d2eccc194df94a4e44c9541c8df0d7f', '2026-05-16 11:43:56.911035', '2026-05-16 11:43:56.911039')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[35m (90.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS `transport_jobs_test`[0m
+  [1m[35m (5.4ms)[0m  [1m[35mCREATE DATABASE `transport_jobs_test` DEFAULT CHARACTER SET `utf8mb4`[0m
+  [1m[35m (3.0ms)[0m  [1m[35mDROP TABLE IF EXISTS `admins` CASCADE[0m
+  [1m[35m (35.0ms)[0m  [1m[35mCREATE TABLE `admins` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) DEFAULT '' NOT NULL, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime(6), `remember_created_at` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, UNIQUE INDEX `index_admins_on_email` (`email`), UNIQUE INDEX `index_admins_on_reset_password_token` (`reset_password_token`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (2.6ms)[0m  [1m[35mDROP TABLE IF EXISTS `applications` CASCADE[0m
+  [1m[35m (33.0ms)[0m  [1m[35mCREATE TABLE `applications` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user_id` bigint NOT NULL, `job_id` bigint NOT NULL, `status` int, `message` text, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_applications_on_job_id` (`job_id`), INDEX `index_applications_on_user_id` (`user_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (2.4ms)[0m  [1m[35mDROP TABLE IF EXISTS `areas` CASCADE[0m
+  [1m[35m (23.4ms)[0m  [1m[35mCREATE TABLE `areas` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `pref_code` int, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (2.0ms)[0m  [1m[35mDROP TABLE IF EXISTS `companies` CASCADE[0m
+  [1m[35m (28.3ms)[0m  [1m[35mCREATE TABLE `companies` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) DEFAULT '' NOT NULL, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime(6), `remember_created_at` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, UNIQUE INDEX `index_companies_on_email` (`email`), UNIQUE INDEX `index_companies_on_reset_password_token` (`reset_password_token`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (1.9ms)[0m  [1m[35mDROP TABLE IF EXISTS `jobs` CASCADE[0m
+  [1m[35m (29.7ms)[0m  [1m[35mCREATE TABLE `jobs` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `company_id` bigint NOT NULL, `title` varchar(255), `description` text, `employment_type` int, `salary_type` int, `salary_min` int, `salary_max` int, `area_id` bigint NOT NULL, `status` int, `published_at` datetime(6), `expires_at` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_jobs_on_area_id` (`area_id`), INDEX `index_jobs_on_company_id` (`company_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (2.0ms)[0m  [1m[35mDROP TABLE IF EXISTS `jobs_license_types` CASCADE[0m
+  [1m[35m (22.3ms)[0m  [1m[35mCREATE TABLE `jobs_license_types` (`job_id` bigint NOT NULL, `license_type_id` bigint NOT NULL, UNIQUE INDEX `index_jobs_license_types_on_job_id_and_license_type_id` (`job_id`, `license_type_id`), INDEX `index_jobs_license_types_on_license_type_id_and_job_id` (`license_type_id`, `job_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (2.2ms)[0m  [1m[35mDROP TABLE IF EXISTS `license_types` CASCADE[0m
+  [1m[35m (22.6ms)[0m  [1m[35mCREATE TABLE `license_types` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `code` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (2.2ms)[0m  [1m[35mDROP TABLE IF EXISTS `users` CASCADE[0m
+  [1m[35m (34.4ms)[0m  [1m[35mCREATE TABLE `users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) DEFAULT '' NOT NULL, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime(6), `remember_created_at` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, UNIQUE INDEX `index_users_on_email` (`email`), UNIQUE INDEX `index_users_on_reset_password_token` (`reset_password_token`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (102.3ms)[0m  [1m[35mALTER TABLE `applications` ADD CONSTRAINT `fk_rails_7a1f279622`
+FOREIGN KEY (`job_id`)
+  REFERENCES `jobs` (`id`)
+[0m
+  [1m[35m (109.6ms)[0m  [1m[35mALTER TABLE `applications` ADD CONSTRAINT `fk_rails_703c720730`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (80.5ms)[0m  [1m[35mALTER TABLE `jobs` ADD CONSTRAINT `fk_rails_3692b6b78b`
+FOREIGN KEY (`area_id`)
+  REFERENCES `areas` (`id`)
+[0m
+  [1m[35m (79.1ms)[0m  [1m[35mALTER TABLE `jobs` ADD CONSTRAINT `fk_rails_b34da78090`
+FOREIGN KEY (`company_id`)
+  REFERENCES `companies` (`id`)
+[0m
+  [1m[35m (28.4ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (3.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (20260512000000)[0m
+  [1m[35m (3.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES
+(20260510153253),
+(20260510152755),
+(20260510152300),
+(20260510152253),
+(20260510151844),
+(20260510151255),
+(20260510151250),
+(20260510150755);[0m
+  [1m[35m (23.4ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.4ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Create (3.1ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2026-05-16 12:23:32.787672', '2026-05-16 12:23:32.787676')[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Update (3.0ms)[0m  [1m[33mUPDATE `ar_internal_metadata` SET `ar_internal_metadata`.`value` = 'test', `ar_internal_metadata`.`updated_at` = '2026-05-16 12:23:32.797170' WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Create (3.1ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('schema_sha1', '3233af2f1d2eccc194df94a4e44c9541c8df0d7f', '2026-05-16 12:23:32.803856', '2026-05-16 12:23:32.803859')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mApplication Exists? (2.3ms)[0m  [1m[34mSELECT 1 AS one FROM `applications` WHERE `applications`.`status` != 4 AND `applications`.`user_id` IS NULL AND `applications`.`job_id` IS NULL AND `applications`.`id` IS NOT NULL LIMIT 1[0m
+  ↳ app/models/application.rb:24:in `prevent_duplicate_active_application'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mApplication Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `applications` WHERE `applications`.`status` != 4 AND `applications`.`user_id` IS NULL AND `applications`.`job_id` IS NULL AND `applications`.`id` IS NOT NULL LIMIT 1[0m
+  ↳ app/models/application.rb:24:in `prevent_duplicate_active_application'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mApplication Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `applications` WHERE `applications`.`status` != 4 AND `applications`.`user_id` IS NULL AND `applications`.`job_id` IS NULL AND `applications`.`id` IS NOT NULL LIMIT 1[0m
+  ↳ app/models/application.rb:24:in `prevent_duplicate_active_application'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (3.9ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('user1@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Create (1.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('求職者サンプル', 'user1@example.com', '$2a$12$1yDmdbXefWkFzi5Eaqbq4eo7v9XsVAcuErQBD9HoVMX/jazh6snAe', NULL, NULL, NULL, '2026-05-16 12:23:33.966109', '2026-05-16 12:23:33.966109')[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company1@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.5ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company1@example.com', '$2a$12$kU5A5TEgN53EH2Y6b0SUOul7KmPSpi7RNNfC9qaXykmojp.CE76LK', NULL, NULL, NULL, '2026-05-16 12:23:34.342481', '2026-05-16 12:23:34.342481')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (3.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('user2@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('求職者サンプル', 'user2@example.com', '$2a$12$QXFStHR7g7TVC0tYy.j2ZOK5gTK9BU61VLyhfuMAecLPTdrpPg4AK', NULL, NULL, NULL, '2026-05-16 12:23:34.670397', '2026-05-16 12:23:34.670397')[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company2@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.6ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company2@example.com', '$2a$12$WCF/vFTdilF1bszZ8NpfR.2ug/FJicGb9y99VbXIHV.Mh3KlPFQZi', NULL, NULL, NULL, '2026-05-16 12:23:35.004710', '2026-05-16 12:23:35.004710')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('user3@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('求職者サンプル', 'user3@example.com', '$2a$12$z1i/0PJxCWOJBYbnFCHbCuGkDvSvclw60UBWSdyNpS9nBJk7z1xH2', NULL, NULL, NULL, '2026-05-16 12:23:35.385553', '2026-05-16 12:23:35.385553')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company3@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.6ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company3@example.com', '$2a$12$zS140nEW9Rzjy9lTA4RuWepDqqJTwZ3CTwEp6dfrFoOlmm1LreeKW', NULL, NULL, NULL, '2026-05-16 12:23:35.694288', '2026-05-16 12:23:35.694288')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company6@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.5ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company6@example.com', '$2a$12$0r88SU6OkEXlGz/boLyFD.RdZwkOunGMRSImqXRUy2NzZgSokXyWq', NULL, NULL, NULL, '2026-05-16 12:23:37.397513', '2026-05-16 12:23:37.397513')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company7@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.6ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company7@example.com', '$2a$12$vOwvVh9yJAgnq0QKUSo.s.pfdTaudpJyQzwS6Rd7/WbDE2avGTpLW', NULL, NULL, NULL, '2026-05-16 12:23:37.704087', '2026-05-16 12:23:37.704087')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company8@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.6ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company8@example.com', '$2a$12$TOZaufCBjxVkGpLc4ZZZL.ooipAOTyBq0.LssZ.5fhYry9V06.f7C', NULL, NULL, NULL, '2026-05-16 12:23:38.025228', '2026-05-16 12:23:38.025228')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mArea Create (5.5ms)[0m  [1m[32mINSERT INTO `areas` (`name`, `pref_code`, `created_at`, `updated_at`) VALUES ('エリア1', 1, '2026-05-16 12:23:38.041930', '2026-05-16 12:23:38.041930')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mArea Create (2.3ms)[0m  [1m[32mINSERT INTO `areas` (`name`, `pref_code`, `created_at`, `updated_at`) VALUES ('エリア2', 2, '2026-05-16 12:23:38.052799', '2026-05-16 12:23:38.052799')[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mLicenseType Create (4.2ms)[0m  [1m[32mINSERT INTO `license_types` (`name`, `code`, `created_at`, `updated_at`) VALUES ('免許1', 'license_1', '2026-05-16 12:23:38.071666', '2026-05-16 12:23:38.071666')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mLicenseType Create (3.0ms)[0m  [1m[32mINSERT INTO `license_types` (`name`, `code`, `created_at`, `updated_at`) VALUES ('免許2', 'license_2', '2026-05-16 12:23:38.080239', '2026-05-16 12:23:38.080239')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company9@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.7ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company9@example.com', '$2a$12$Z/cQf2mgpRZwG0bmOcAdoubpm.jV.zABZeTU8Y9n4u5Ao0VHi0RE2', NULL, NULL, NULL, '2026-05-16 12:23:38.400567', '2026-05-16 12:23:38.400567')[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (3.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mLicenseType Create (3.3ms)[0m  [1m[32mINSERT INTO `license_types` (`name`, `code`, `created_at`, `updated_at`) VALUES ('免許3', 'license_3', '2026-05-16 12:23:38.417230', '2026-05-16 12:23:38.417230')[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mLicenseType Create (3.8ms)[0m  [1m[32mINSERT INTO `license_types` (`name`, `code`, `created_at`, `updated_at`) VALUES ('免許4', 'license_4', '2026-05-16 12:23:38.427001', '2026-05-16 12:23:38.427001')[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company10@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.7ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company10@example.com', '$2a$12$87iNNv913ix92rvYCt.ghOV3146Finh.ERHev2XevkdGE724/3EJK', NULL, NULL, NULL, '2026-05-16 12:23:38.783396', '2026-05-16 12:23:38.783396')[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('user6@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('求職者サンプル', 'user6@example.com', '$2a$12$azlMCIw/R1arwg3z/uHr2eVdvDy7QVIyK0jKhEjqul5iWwfq7SJp2', NULL, NULL, NULL, '2026-05-16 12:23:39.190834', '2026-05-16 12:23:39.190834')[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company11@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.6ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company11@example.com', '$2a$12$3Y32iYCnwRzkNaOxCFi5g.15CrwS8ko6UI9r9/75ehxyQGYPGef0.', NULL, NULL, NULL, '2026-05-16 12:23:39.510165', '2026-05-16 12:23:39.510165')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('user7@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('求職者サンプル', 'user7@example.com', '$2a$12$gONGBtc47MJit8hn6q7DGOuB0qu14szS8FMb2BsCKoNcNDqNwt14O', NULL, NULL, NULL, '2026-05-16 12:23:39.845612', '2026-05-16 12:23:39.845612')[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company12@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.7ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company12@example.com', '$2a$12$SQrkraG0CeaxuWWeMoo.YeYYYxSd8DP0UM.wE2Ol9XbpglwwQeIb6', NULL, NULL, NULL, '2026-05-16 12:23:40.157589', '2026-05-16 12:23:40.157589')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[35m (92.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS `transport_jobs_test`[0m
+  [1m[35m (6.6ms)[0m  [1m[35mCREATE DATABASE `transport_jobs_test` DEFAULT CHARACTER SET `utf8mb4`[0m
+  [1m[35m (4.0ms)[0m  [1m[35mDROP TABLE IF EXISTS `admins` CASCADE[0m
+  [1m[35m (54.1ms)[0m  [1m[35mCREATE TABLE `admins` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) DEFAULT '' NOT NULL, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime(6), `remember_created_at` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, UNIQUE INDEX `index_admins_on_email` (`email`), UNIQUE INDEX `index_admins_on_reset_password_token` (`reset_password_token`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (3.9ms)[0m  [1m[35mDROP TABLE IF EXISTS `applications` CASCADE[0m
+  [1m[35m (42.9ms)[0m  [1m[35mCREATE TABLE `applications` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user_id` bigint NOT NULL, `job_id` bigint NOT NULL, `status` int, `message` text, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_applications_on_job_id` (`job_id`), INDEX `index_applications_on_user_id` (`user_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (2.5ms)[0m  [1m[35mDROP TABLE IF EXISTS `areas` CASCADE[0m
+  [1m[35m (26.3ms)[0m  [1m[35mCREATE TABLE `areas` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `pref_code` int, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (2.3ms)[0m  [1m[35mDROP TABLE IF EXISTS `companies` CASCADE[0m
+  [1m[35m (32.8ms)[0m  [1m[35mCREATE TABLE `companies` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) DEFAULT '' NOT NULL, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime(6), `remember_created_at` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, UNIQUE INDEX `index_companies_on_email` (`email`), UNIQUE INDEX `index_companies_on_reset_password_token` (`reset_password_token`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (2.1ms)[0m  [1m[35mDROP TABLE IF EXISTS `jobs` CASCADE[0m
+  [1m[35m (30.3ms)[0m  [1m[35mCREATE TABLE `jobs` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `company_id` bigint NOT NULL, `title` varchar(255), `description` text, `employment_type` int, `salary_type` int, `salary_min` int, `salary_max` int, `area_id` bigint NOT NULL, `status` int, `published_at` datetime(6), `expires_at` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_jobs_on_area_id` (`area_id`), INDEX `index_jobs_on_company_id` (`company_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (2.2ms)[0m  [1m[35mDROP TABLE IF EXISTS `jobs_license_types` CASCADE[0m
+  [1m[35m (24.6ms)[0m  [1m[35mCREATE TABLE `jobs_license_types` (`job_id` bigint NOT NULL, `license_type_id` bigint NOT NULL, UNIQUE INDEX `index_jobs_license_types_on_job_id_and_license_type_id` (`job_id`, `license_type_id`), INDEX `index_jobs_license_types_on_license_type_id_and_job_id` (`license_type_id`, `job_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (2.5ms)[0m  [1m[35mDROP TABLE IF EXISTS `license_types` CASCADE[0m
+  [1m[35m (25.0ms)[0m  [1m[35mCREATE TABLE `license_types` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `code` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (2.2ms)[0m  [1m[35mDROP TABLE IF EXISTS `users` CASCADE[0m
+  [1m[35m (36.2ms)[0m  [1m[35mCREATE TABLE `users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) DEFAULT '' NOT NULL, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime(6), `remember_created_at` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, UNIQUE INDEX `index_users_on_email` (`email`), UNIQUE INDEX `index_users_on_reset_password_token` (`reset_password_token`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (76.6ms)[0m  [1m[35mALTER TABLE `applications` ADD CONSTRAINT `fk_rails_7a1f279622`
+FOREIGN KEY (`job_id`)
+  REFERENCES `jobs` (`id`)
+[0m
+  [1m[35m (86.5ms)[0m  [1m[35mALTER TABLE `applications` ADD CONSTRAINT `fk_rails_703c720730`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (85.7ms)[0m  [1m[35mALTER TABLE `jobs` ADD CONSTRAINT `fk_rails_3692b6b78b`
+FOREIGN KEY (`area_id`)
+  REFERENCES `areas` (`id`)
+[0m
+  [1m[35m (88.9ms)[0m  [1m[35mALTER TABLE `jobs` ADD CONSTRAINT `fk_rails_b34da78090`
+FOREIGN KEY (`company_id`)
+  REFERENCES `companies` (`id`)
+[0m
+  [1m[35m (27.4ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (3.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (20260512000000)[0m
+  [1m[35m (5.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES
+(20260510153253),
+(20260510152755),
+(20260510152300),
+(20260510152253),
+(20260510151844),
+(20260510151255),
+(20260510151250),
+(20260510150755);[0m
+  [1m[35m (30.8ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.7ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Create (3.4ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2026-05-16 13:24:08.177017', '2026-05-16 13:24:08.177021')[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Update (3.9ms)[0m  [1m[33mUPDATE `ar_internal_metadata` SET `ar_internal_metadata`.`value` = 'test', `ar_internal_metadata`.`updated_at` = '2026-05-16 13:24:08.189405' WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Create (4.1ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('schema_sha1', '3233af2f1d2eccc194df94a4e44c9541c8df0d7f', '2026-05-16 13:24:08.198942', '2026-05-16 13:24:08.198946')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company1@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.6ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company1@example.com', '$2a$12$N6M8KC.8S4YGlYw4WuL1DOhSqbB9PEFD0KoeRfNEMSuk0dDHMCsb.', NULL, NULL, NULL, '2026-05-16 13:24:09.359022', '2026-05-16 13:24:09.359022')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mArea Create (2.7ms)[0m  [1m[32mINSERT INTO `areas` (`name`, `pref_code`, `created_at`, `updated_at`) VALUES ('エリア1', 1, '2026-05-16 13:24:09.374461', '2026-05-16 13:24:09.374461')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mJob Create (3.5ms)[0m  [1m[32mINSERT INTO `jobs` (`company_id`, `title`, `description`, `employment_type`, `salary_type`, `salary_min`, `salary_max`, `area_id`, `status`, `published_at`, `expires_at`, `created_at`, `updated_at`) VALUES (57, '都内ルート配送ドライバー', '固定ルートで配送する仕事です。', 0, 0, 280000, 360000, 43, 1, '2026-05-16 13:24:09.381447', '2026-06-15 13:24:09.381500', '2026-05-16 13:24:09.382189', '2026-05-16 13:24:09.382189')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company2@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.6ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company2@example.com', '$2a$12$s8P5MieR44xkQwzvEQfFkegx1/HjtuAKEGCFQ..CQYdNMJRjUR.FG', NULL, NULL, NULL, '2026-05-16 13:24:09.694793', '2026-05-16 13:24:09.694793')[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mArea Create (2.4ms)[0m  [1m[32mINSERT INTO `areas` (`name`, `pref_code`, `created_at`, `updated_at`) VALUES ('エリア2', 2, '2026-05-16 13:24:09.700094', '2026-05-16 13:24:09.700094')[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mJob Create (2.8ms)[0m  [1m[32mINSERT INTO `jobs` (`company_id`, `title`, `description`, `employment_type`, `salary_type`, `salary_min`, `salary_max`, `area_id`, `status`, `published_at`, `expires_at`, `created_at`, `updated_at`) VALUES (58, '都内ルート配送ドライバー', '固定ルートで配送する仕事です。', 0, 0, 280000, 360000, 44, 0, '2026-05-16 13:24:09.707035', '2026-06-15 13:24:09.707088', '2026-05-16 13:24:09.707689', '2026-05-16 13:24:09.707689')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mJob Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `jobs` WHERE `jobs`.`status` = 1 AND `jobs`.`id` = 43 LIMIT 1[0m
+  [1m[36mJob Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `jobs` WHERE `jobs`.`status` = 1 AND `jobs`.`id` = 44 LIMIT 1[0m
+  [1m[36mJob Load (0.6ms)[0m  [1m[34mSELECT `jobs`.* FROM `jobs` WHERE `jobs`.`status` = 1[0m
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company3@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.9ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company3@example.com', '$2a$12$Jl8AuW94xt0CkWCGZyy1G.blWWBcOBDtyq/j17cT9mQn.h/QilipK', NULL, NULL, NULL, '2026-05-16 13:24:10.056532', '2026-05-16 13:24:10.056532')[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mArea Create (4.9ms)[0m  [1m[32mINSERT INTO `areas` (`name`, `pref_code`, `created_at`, `updated_at`) VALUES ('エリア3', 3, '2026-05-16 13:24:10.078960', '2026-05-16 13:24:10.078960')[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mJob Create (4.5ms)[0m  [1m[32mINSERT INTO `jobs` (`company_id`, `title`, `description`, `employment_type`, `salary_type`, `salary_min`, `salary_max`, `area_id`, `status`, `published_at`, `expires_at`, `created_at`, `updated_at`) VALUES (59, '都内ルート配送ドライバー', '固定ルートで配送する仕事です。', 0, 0, 280000, 360000, 45, 1, '2026-05-16 13:24:10.090577', '2026-05-17 13:24:09.742609', '2026-05-16 13:24:10.091278', '2026-05-16 13:24:10.091278')[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company4@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.8ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company4@example.com', '$2a$12$hPPx0K3ZUH36WesH1N0XAe5LCT9m9sE9PfWPMcssqYNIR5I4Ggx/a', NULL, NULL, NULL, '2026-05-16 13:24:10.492070', '2026-05-16 13:24:10.492070')[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mArea Create (3.4ms)[0m  [1m[32mINSERT INTO `areas` (`name`, `pref_code`, `created_at`, `updated_at`) VALUES ('エリア4', 4, '2026-05-16 13:24:10.500272', '2026-05-16 13:24:10.500272')[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mJob Create (3.5ms)[0m  [1m[32mINSERT INTO `jobs` (`company_id`, `title`, `description`, `employment_type`, `salary_type`, `salary_min`, `salary_max`, `area_id`, `status`, `published_at`, `expires_at`, `created_at`, `updated_at`) VALUES (60, '都内ルート配送ドライバー', '固定ルートで配送する仕事です。', 0, 0, 280000, 360000, 46, 1, '2026-05-16 13:24:10.509489', NULL, '2026-05-16 13:24:10.509960', '2026-05-16 13:24:10.509960')[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company5@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.5ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company5@example.com', '$2a$12$15wYTtCPJe0ujqOtQsi.Veg9Xru7taURdJHt4PaPV4e8QVjhKOB6m', NULL, NULL, NULL, '2026-05-16 13:24:10.876461', '2026-05-16 13:24:10.876461')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mArea Create (2.6ms)[0m  [1m[32mINSERT INTO `areas` (`name`, `pref_code`, `created_at`, `updated_at`) VALUES ('エリア5', 5, '2026-05-16 13:24:10.881435', '2026-05-16 13:24:10.881435')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mJob Create (2.3ms)[0m  [1m[32mINSERT INTO `jobs` (`company_id`, `title`, `description`, `employment_type`, `salary_type`, `salary_min`, `salary_max`, `area_id`, `status`, `published_at`, `expires_at`, `created_at`, `updated_at`) VALUES (61, '都内ルート配送ドライバー', '固定ルートで配送する仕事です。', 0, 0, 280000, 360000, 47, 0, '2026-05-16 13:24:10.887798', '2026-05-17 13:24:10.518405', '2026-05-16 13:24:10.888138', '2026-05-16 13:24:10.888138')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company6@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.5ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company6@example.com', '$2a$12$L/tpAiuk0ju663FpaJHta.ptJWH8RqeLe5X9vDmlOitUhuOIfTLWG', NULL, NULL, NULL, '2026-05-16 13:24:11.225244', '2026-05-16 13:24:11.225244')[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mArea Create (2.5ms)[0m  [1m[32mINSERT INTO `areas` (`name`, `pref_code`, `created_at`, `updated_at`) VALUES ('エリア6', 6, '2026-05-16 13:24:11.233329', '2026-05-16 13:24:11.233329')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mJob Create (2.3ms)[0m  [1m[32mINSERT INTO `jobs` (`company_id`, `title`, `description`, `employment_type`, `salary_type`, `salary_min`, `salary_max`, `area_id`, `status`, `published_at`, `expires_at`, `created_at`, `updated_at`) VALUES (62, '都内ルート配送ドライバー', '固定ルートで配送する仕事です。', 0, 0, 280000, 360000, 48, 1, '2026-05-16 13:24:11.239929', '2026-05-15 13:24:10.893764', '2026-05-16 13:24:11.240283', '2026-05-16 13:24:11.240283')[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mJob Exists? (2.0ms)[0m  [1m[34mSELECT 1 AS one FROM `jobs` WHERE `jobs`.`status` = 1 AND (expires_at IS NULL OR expires_at > '2026-05-16 13:24:11.248794') AND `jobs`.`id` = 45 LIMIT 1[0m
+  [1m[36mJob Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `jobs` WHERE `jobs`.`status` = 1 AND (expires_at IS NULL OR expires_at > '2026-05-16 13:24:11.248794') AND `jobs`.`id` = 46 LIMIT 1[0m
+  [1m[36mJob Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `jobs` WHERE `jobs`.`status` = 1 AND (expires_at IS NULL OR expires_at > '2026-05-16 13:24:11.254950') AND `jobs`.`id` = 47 LIMIT 1[0m
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT `jobs`.* FROM `jobs` WHERE `jobs`.`status` = 1 AND (expires_at IS NULL OR expires_at > '2026-05-16 13:24:11.254950')[0m
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company7@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.8ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company7@example.com', '$2a$12$IZlVmBiSvfZC53ZXvj0liu0ORoq9t4PUlzXWy.L5Kd/8ix/V/lE8O', NULL, NULL, NULL, '2026-05-16 13:24:11.571660', '2026-05-16 13:24:11.571660')[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mArea Create (3.1ms)[0m  [1m[32mINSERT INTO `areas` (`name`, `pref_code`, `created_at`, `updated_at`) VALUES ('エリア7', 7, '2026-05-16 13:24:11.578572', '2026-05-16 13:24:11.578572')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mJob Create (2.1ms)[0m  [1m[32mINSERT INTO `jobs` (`company_id`, `title`, `description`, `employment_type`, `salary_type`, `salary_min`, `salary_max`, `area_id`, `status`, `published_at`, `expires_at`, `created_at`, `updated_at`) VALUES (63, '都内ルート配送ドライバー', '固定ルートで配送する仕事です。', 0, 0, 280000, 360000, 49, 1, '2026-05-16 13:24:11.586274', '2026-05-15 13:24:11.265899', '2026-05-16 13:24:11.586672', '2026-05-16 13:24:11.586672')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company8@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.6ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company8@example.com', '$2a$12$6x7Gtoj.VFtY8AOFHbLSe.38Z5dieuPA88QbfLMsrnr0kZPaZ7.oq', NULL, NULL, NULL, '2026-05-16 13:24:11.900071', '2026-05-16 13:24:11.900071')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mArea Create (3.3ms)[0m  [1m[32mINSERT INTO `areas` (`name`, `pref_code`, `created_at`, `updated_at`) VALUES ('エリア8', 8, '2026-05-16 13:24:11.905516', '2026-05-16 13:24:11.905516')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mJob Create (2.7ms)[0m  [1m[32mINSERT INTO `jobs` (`company_id`, `title`, `description`, `employment_type`, `salary_type`, `salary_min`, `salary_max`, `area_id`, `status`, `published_at`, `expires_at`, `created_at`, `updated_at`) VALUES (64, '都内ルート配送ドライバー', '固定ルートで配送する仕事です。', 0, 0, 280000, 360000, 50, 1, '2026-05-16 13:24:11.913462', '2026-05-17 13:24:11.592075', '2026-05-16 13:24:11.913887', '2026-05-16 13:24:11.913887')[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company9@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.7ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company9@example.com', '$2a$12$zQfSO52jMTde4FHIByhXjuKHwYpjrkZduvTI.yj.zJiEhcxtaly7G', NULL, NULL, NULL, '2026-05-16 13:24:12.242678', '2026-05-16 13:24:12.242678')[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mArea Create (2.8ms)[0m  [1m[32mINSERT INTO `areas` (`name`, `pref_code`, `created_at`, `updated_at`) VALUES ('エリア9', 9, '2026-05-16 13:24:12.248596', '2026-05-16 13:24:12.248596')[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mJob Create (3.0ms)[0m  [1m[32mINSERT INTO `jobs` (`company_id`, `title`, `description`, `employment_type`, `salary_type`, `salary_min`, `salary_max`, `area_id`, `status`, `published_at`, `expires_at`, `created_at`, `updated_at`) VALUES (65, '都内ルート配送ドライバー', '固定ルートで配送する仕事です。', 0, 0, 280000, 360000, 51, 0, '2026-05-16 13:24:12.255954', '2026-05-15 13:24:11.920452', '2026-05-16 13:24:12.256337', '2026-05-16 13:24:12.256337')[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mJob Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `jobs` WHERE `jobs`.`status` = 1 AND (expires_at <= '2026-05-16 13:24:12.264577') AND `jobs`.`id` = 49 LIMIT 1[0m
+  [1m[36mJob Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `jobs` WHERE `jobs`.`status` = 1 AND (expires_at <= '2026-05-16 13:24:12.267970') AND `jobs`.`id` = 50 LIMIT 1[0m
+  [1m[36mJob Load (0.5ms)[0m  [1m[34mSELECT `jobs`.* FROM `jobs` WHERE `jobs`.`status` = 1 AND (expires_at <= '2026-05-16 13:24:12.267970')[0m
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mArea Create (3.0ms)[0m  [1m[32mINSERT INTO `areas` (`name`, `pref_code`, `created_at`, `updated_at`) VALUES ('エリア10', 10, '2026-05-16 13:24:12.281148', '2026-05-16 13:24:12.281148')[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mArea Create (2.6ms)[0m  [1m[32mINSERT INTO `areas` (`name`, `pref_code`, `created_at`, `updated_at`) VALUES ('エリア11', 11, '2026-05-16 13:24:12.291070', '2026-05-16 13:24:12.291070')[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mLicenseType Create (3.1ms)[0m  [1m[32mINSERT INTO `license_types` (`name`, `code`, `created_at`, `updated_at`) VALUES ('免許1', 'license_1', '2026-05-16 13:24:12.313769', '2026-05-16 13:24:12.313769')[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mLicenseType Create (3.2ms)[0m  [1m[32mINSERT INTO `license_types` (`name`, `code`, `created_at`, `updated_at`) VALUES ('免許2', 'license_2', '2026-05-16 13:24:12.322355', '2026-05-16 13:24:12.322355')[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company10@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.5ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company10@example.com', '$2a$12$GVs.Ev5olygsyMvNODl9VecwFE6m9stJUeBfw39NguTlFFEhaY1Cy', NULL, NULL, NULL, '2026-05-16 13:24:12.683000', '2026-05-16 13:24:12.683000')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mJob Create (2.3ms)[0m  [1m[32mINSERT INTO `jobs` (`company_id`, `title`, `description`, `employment_type`, `salary_type`, `salary_min`, `salary_max`, `area_id`, `status`, `published_at`, `expires_at`, `created_at`, `updated_at`) VALUES (66, '大型配送ドライバー', '固定ルートで配送する仕事です。', 0, 0, 300000, 360000, 52, 1, '2026-05-16 13:24:12.687985', '2026-06-15 13:24:12.688012', '2026-05-16 13:24:12.688387', '2026-05-16 13:24:12.688387')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mJob::HABTM_LicenseTypes Create (1.1ms)[0m  [1m[32mINSERT INTO `jobs_license_types` (`job_id`, `license_type_id`) VALUES (52, 19)[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company11@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.5ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company11@example.com', '$2a$12$1MlCd2EPHrdcWCVf.YrK0uXLqqjRr773Bg7WUQMVig2f9R13n2uA.', NULL, NULL, NULL, '2026-05-16 13:24:13.041664', '2026-05-16 13:24:13.041664')[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mJob Create (2.5ms)[0m  [1m[32mINSERT INTO `jobs` (`company_id`, `title`, `description`, `employment_type`, `salary_type`, `salary_min`, `salary_max`, `area_id`, `status`, `published_at`, `expires_at`, `created_at`, `updated_at`) VALUES (67, '大型配送ドライバー', '固定ルートで配送する仕事です。', 0, 0, 300000, 360000, 53, 1, '2026-05-16 13:24:13.047153', '2026-06-15 13:24:13.047185', '2026-05-16 13:24:13.047594', '2026-05-16 13:24:13.047594')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company12@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.6ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company12@example.com', '$2a$12$GW5RjFDxRtQ7k40ytE3I4uNjcNhopD9miapnwC5LWDz0lXRIRJUmS', NULL, NULL, NULL, '2026-05-16 13:24:13.346090', '2026-05-16 13:24:13.346090')[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mJob Create (2.6ms)[0m  [1m[32mINSERT INTO `jobs` (`company_id`, `title`, `description`, `employment_type`, `salary_type`, `salary_min`, `salary_max`, `area_id`, `status`, `published_at`, `expires_at`, `created_at`, `updated_at`) VALUES (68, '大型配送ドライバー', '固定ルートで配送する仕事です。', 1, 0, 300000, 360000, 52, 1, '2026-05-16 13:24:13.351607', '2026-06-15 13:24:13.351647', '2026-05-16 13:24:13.352125', '2026-05-16 13:24:13.352125')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company13@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.5ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company13@example.com', '$2a$12$45auG0SP3YrvxigJhp1C1ONOP47W1jDWVZ52a4OpL1wgm/8.NISG6', NULL, NULL, NULL, '2026-05-16 13:24:13.652635', '2026-05-16 13:24:13.652635')[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mJob Create (2.8ms)[0m  [1m[32mINSERT INTO `jobs` (`company_id`, `title`, `description`, `employment_type`, `salary_type`, `salary_min`, `salary_max`, `area_id`, `status`, `published_at`, `expires_at`, `created_at`, `updated_at`) VALUES (69, '大型配送ドライバー', '固定ルートで配送する仕事です。', 0, 0, 200000, 360000, 52, 1, '2026-05-16 13:24:13.657809', '2026-06-15 13:24:13.657834', '2026-05-16 13:24:13.658176', '2026-05-16 13:24:13.658176')[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company14@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.7ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company14@example.com', '$2a$12$7WKXykwLKmFD5PkR3ZaK3.ld64SsjfxzUqu08HjRxdbGxsNJ2jT/e', NULL, NULL, NULL, '2026-05-16 13:24:13.965610', '2026-05-16 13:24:13.965610')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mJob Create (2.8ms)[0m  [1m[32mINSERT INTO `jobs` (`company_id`, `title`, `description`, `employment_type`, `salary_type`, `salary_min`, `salary_max`, `area_id`, `status`, `published_at`, `expires_at`, `created_at`, `updated_at`) VALUES (70, '大型配送ドライバー', '固定ルートで配送する仕事です。', 0, 0, 300000, 360000, 52, 1, '2026-05-16 13:24:13.971163', '2026-06-15 13:24:13.971189', '2026-05-16 13:24:13.971567', '2026-05-16 13:24:13.971567')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mJob::HABTM_LicenseTypes Create (3.7ms)[0m  [1m[32mINSERT INTO `jobs_license_types` (`job_id`, `license_type_id`) VALUES (56, 20)[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company15@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.5ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company15@example.com', '$2a$12$CZ1F9vlRK5tQA5nCc99XmeZNijWD5hJhTdozbH6gId9baTB3dZkzO', NULL, NULL, NULL, '2026-05-16 13:24:14.273227', '2026-05-16 13:24:14.273227')[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mJob Create (2.4ms)[0m  [1m[32mINSERT INTO `jobs` (`company_id`, `title`, `description`, `employment_type`, `salary_type`, `salary_min`, `salary_max`, `area_id`, `status`, `published_at`, `expires_at`, `created_at`, `updated_at`) VALUES (71, '軽貨物ドライバー', '固定ルートで配送する仕事です。', 0, 0, 300000, 360000, 52, 1, '2026-05-16 13:24:14.278477', '2026-06-15 13:24:14.278504', '2026-05-16 13:24:14.279001', '2026-05-16 13:24:14.279001')[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mJob Load (0.8ms)[0m  [1m[34mSELECT DISTINCT `jobs`.* FROM `jobs` INNER JOIN `jobs_license_types` ON `jobs_license_types`.`job_id` = `jobs`.`id` INNER JOIN `license_types` ON `license_types`.`id` = `jobs_license_types`.`license_type_id` WHERE `jobs`.`area_id` = 52 AND `jobs`.`employment_type` = 0 AND (salary_min >= '250000') AND `license_types`.`id` = 19 AND (title LIKE '%大型%' OR description LIKE '%大型%')[0m
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mLicenseType Create (2.5ms)[0m  [1m[32mINSERT INTO `license_types` (`name`, `code`, `created_at`, `updated_at`) VALUES ('免許3', 'license_3', '2026-05-16 13:24:14.298370', '2026-05-16 13:24:14.298370')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mLicenseType Create (2.2ms)[0m  [1m[32mINSERT INTO `license_types` (`name`, `code`, `created_at`, `updated_at`) VALUES ('免許4', 'license_4', '2026-05-16 13:24:14.304881', '2026-05-16 13:24:14.304881')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCompany Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `companies` WHERE `companies`.`email` = CAST('company16@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mCompany Create (0.5ms)[0m  [1m[32mINSERT INTO `companies` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('サンプル運送株式会社', 'company16@example.com', '$2a$12$AfV9PABypZJhv/ylLXfOGuS1UpQi1zflkHBTU7lK0qI3IXNayOb6i', NULL, NULL, NULL, '2026-05-16 13:24:14.619359', '2026-05-16 13:24:14.619359')[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mArea Create (2.8ms)[0m  [1m[32mINSERT INTO `areas` (`name`, `pref_code`, `created_at`, `updated_at`) VALUES ('エリア12', 12, '2026-05-16 13:24:14.624426', '2026-05-16 13:24:14.624426')[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mJob Create (2.0ms)[0m  [1m[32mINSERT INTO `jobs` (`company_id`, `title`, `description`, `employment_type`, `salary_type`, `salary_min`, `salary_max`, `area_id`, `status`, `published_at`, `expires_at`, `created_at`, `updated_at`) VALUES (72, '都内ルート配送ドライバー', '固定ルートで配送する仕事です。', 0, 0, 280000, 360000, 54, 1, '2026-05-16 13:24:14.631162', '2026-06-15 13:24:14.631192', '2026-05-16 13:24:14.631577', '2026-05-16 13:24:14.631577')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mJob::HABTM_LicenseTypes Create (2.7ms)[0m  [1m[32mINSERT INTO `jobs_license_types` (`job_id`, `license_type_id`) VALUES (58, 21)[0m
+  [1m[36mJob::HABTM_LicenseTypes Create (0.5ms)[0m  [1m[32mINSERT INTO `jobs_license_types` (`job_id`, `license_type_id`) VALUES (58, 22)[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mJob Load (0.6ms)[0m  [1m[34mSELECT DISTINCT `jobs`.* FROM `jobs` INNER JOIN `jobs_license_types` ON `jobs_license_types`.`job_id` = `jobs`.`id` INNER JOIN `license_types` ON `license_types`.`id` = `jobs_license_types`.`license_type_id` WHERE `license_types`.`id` IN (21, 22)[0m
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[35m (115.4ms)[0m  [1m[35mDROP DATABASE IF EXISTS `transport_jobs_test`[0m
+  [1m[35m (7.5ms)[0m  [1m[35mCREATE DATABASE `transport_jobs_test` DEFAULT CHARACTER SET `utf8mb4`[0m
+  [1m[35m (3.6ms)[0m  [1m[35mDROP TABLE IF EXISTS `admins` CASCADE[0m
+  [1m[35m (39.5ms)[0m  [1m[35mCREATE TABLE `admins` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) DEFAULT '' NOT NULL, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime(6), `remember_created_at` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, UNIQUE INDEX `index_admins_on_email` (`email`), UNIQUE INDEX `index_admins_on_reset_password_token` (`reset_password_token`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (2.4ms)[0m  [1m[35mDROP TABLE IF EXISTS `applications` CASCADE[0m
+  [1m[35m (34.8ms)[0m  [1m[35mCREATE TABLE `applications` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user_id` bigint NOT NULL, `job_id` bigint NOT NULL, `status` int, `message` text, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_applications_on_job_id` (`job_id`), INDEX `index_applications_on_user_id` (`user_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (2.5ms)[0m  [1m[35mDROP TABLE IF EXISTS `areas` CASCADE[0m
+  [1m[35m (27.6ms)[0m  [1m[35mCREATE TABLE `areas` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `pref_code` int, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (3.0ms)[0m  [1m[35mDROP TABLE IF EXISTS `companies` CASCADE[0m
+  [1m[35m (34.8ms)[0m  [1m[35mCREATE TABLE `companies` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) DEFAULT '' NOT NULL, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime(6), `remember_created_at` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, UNIQUE INDEX `index_companies_on_email` (`email`), UNIQUE INDEX `index_companies_on_reset_password_token` (`reset_password_token`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (3.1ms)[0m  [1m[35mDROP TABLE IF EXISTS `jobs` CASCADE[0m
+  [1m[35m (36.7ms)[0m  [1m[35mCREATE TABLE `jobs` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `company_id` bigint NOT NULL, `title` varchar(255), `description` text, `employment_type` int, `salary_type` int, `salary_min` int, `salary_max` int, `area_id` bigint NOT NULL, `status` int, `published_at` datetime(6), `expires_at` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_jobs_on_area_id` (`area_id`), INDEX `index_jobs_on_company_id` (`company_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (2.8ms)[0m  [1m[35mDROP TABLE IF EXISTS `jobs_license_types` CASCADE[0m
+  [1m[35m (38.1ms)[0m  [1m[35mCREATE TABLE `jobs_license_types` (`job_id` bigint NOT NULL, `license_type_id` bigint NOT NULL, UNIQUE INDEX `index_jobs_license_types_on_job_id_and_license_type_id` (`job_id`, `license_type_id`), INDEX `index_jobs_license_types_on_license_type_id_and_job_id` (`license_type_id`, `job_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (2.6ms)[0m  [1m[35mDROP TABLE IF EXISTS `license_types` CASCADE[0m
+  [1m[35m (28.7ms)[0m  [1m[35mCREATE TABLE `license_types` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `code` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (2.7ms)[0m  [1m[35mDROP TABLE IF EXISTS `users` CASCADE[0m
+  [1m[35m (41.8ms)[0m  [1m[35mCREATE TABLE `users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) DEFAULT '' NOT NULL, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime(6), `remember_created_at` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, UNIQUE INDEX `index_users_on_email` (`email`), UNIQUE INDEX `index_users_on_reset_password_token` (`reset_password_token`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci[0m
+  [1m[35m (104.6ms)[0m  [1m[35mALTER TABLE `applications` ADD CONSTRAINT `fk_rails_7a1f279622`
+FOREIGN KEY (`job_id`)
+  REFERENCES `jobs` (`id`)
+[0m
+  [1m[35m (122.8ms)[0m  [1m[35mALTER TABLE `applications` ADD CONSTRAINT `fk_rails_703c720730`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (99.5ms)[0m  [1m[35mALTER TABLE `jobs` ADD CONSTRAINT `fk_rails_3692b6b78b`
+FOREIGN KEY (`area_id`)
+  REFERENCES `areas` (`id`)
+[0m
+  [1m[35m (93.3ms)[0m  [1m[35mALTER TABLE `jobs` ADD CONSTRAINT `fk_rails_b34da78090`
+FOREIGN KEY (`company_id`)
+  REFERENCES `companies` (`id`)
+[0m
+  [1m[35m (26.9ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (3.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (20260512000000)[0m
+  [1m[35m (5.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES
+(20260510153253),
+(20260510152755),
+(20260510152300),
+(20260510152253),
+(20260510151844),
+(20260510151255),
+(20260510151250),
+(20260510150755);[0m
+  [1m[35m (26.0ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.5ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Create (4.5ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2026-05-16 14:23:43.479243', '2026-05-16 14:23:43.479249')[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Update (4.3ms)[0m  [1m[33mUPDATE `ar_internal_metadata` SET `ar_internal_metadata`.`value` = 'test', `ar_internal_metadata`.`updated_at` = '2026-05-16 14:23:43.494126' WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Create (4.0ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('schema_sha1', '3233af2f1d2eccc194df94a4e44c9541c8df0d7f', '2026-05-16 14:23:43.503718', '2026-05-16 14:23:43.503722')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (5.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('user1@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Create (1.6ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('求職者サンプル', 'user1@example.com', '$2a$12$P3yz.Qu3hf7hoJHlufpXqOA/DHR1Ydu0SEg2W3oD8mPpFIzL8Pcci', NULL, NULL, NULL, '2026-05-16 14:23:45.838746', '2026-05-16 14:23:45.838746')[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (3.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('user2@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('求職者サンプル', 'user2@example.com', '$2a$12$piJvAk0tGAg/z4MEmIaYx.Ut2.tmFapob7RmtRzJsuDQtEo2ozwoq', NULL, NULL, NULL, '2026-05-16 14:23:46.433754', '2026-05-16 14:23:46.433754')[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (5.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('user3@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('求職者サンプル', 'user3@example.com', '$2a$12$pXKuwg8IWp9vpumq7uiqeOO/c5KWDA7QBWHL47Z7YHXM.WHfBY/H6', NULL, NULL, NULL, '2026-05-16 14:23:46.906912', '2026-05-16 14:23:46.906912')[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('user6@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('求職者サンプル', 'user6@example.com', '$2a$12$ze70nBTftK7CJv/GMsNDXO4o8XvjEqzJHPz/7lM1r5M7u7/cfkqIm', NULL, NULL, NULL, '2026-05-16 14:23:48.264088', '2026-05-16 14:23:48.264088')[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = CAST('user7@example.com' AS BINARY) LIMIT 1[0m
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('求職者サンプル', 'user7@example.com', '$2a$12$hJCXyXTV4vgRY1G9zCOEoO030reaS7XMmK2SW6aJUKOJos99nrKN.', NULL, NULL, NULL, '2026-05-16 14:23:48.677854', '2026-05-16 14:23:48.677854')[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[31mROLLBACK[0m

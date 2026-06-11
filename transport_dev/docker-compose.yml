@@ -25,6 +25,18 @@ services:
     ports:
       - "6379:6379"
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: password
+    depends_on:
+      db:
+        condition: service_healthy
+
   app:
     build:
       context: ./src
